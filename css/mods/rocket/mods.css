@@ -1,0 +1,8 @@
+body{
+	font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+	background: #white url(images/stripe2.png);
+}
+
+.main_header{	
+	background: #white url(images/stripe2.png) !important;
+}

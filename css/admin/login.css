@@ -1,0 +1,8 @@
+form{
+	background: transparent url('/images/backgrounds/badge.png') !important;
+	background-repeat: no-repeat;
+	background-size: 450px 280px !important;
+	box-shadow: none;
+	border: none 0;
+	height: 277px;
+}

@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>	
+	# Enrutamiento mediante htacces de apache		
+    RewriteEngine On		
+	RewriteRule ^admin$		     mvc_core/entrada.php/admin/general/index [NC,L]   # 	
+	RewriteRule ^admin/$		 mvc_core/entrada.php/admin/general/index [NC,L]   # 
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ mvc_core/entrada.php/$1 [L]
+	ErrorDocument 500 error500.html
+</IfModule>
