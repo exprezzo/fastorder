@@ -10,8 +10,7 @@ $DB_CONFIG=array(
 
 // Configuracion del ssitio
 define ("NOMBRE_APL",'LA MONA');
-define ("TEMA",'rocket');
-
+define ("TEMA",'blitzer');
 /*
 Temas disponibles:   (la intencion es agregar todos los temas de jqureyui y de wijmo, pero no queremos ser dependientes de sus servicios web)
 aristo

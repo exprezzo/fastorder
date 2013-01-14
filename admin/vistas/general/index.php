@@ -15,7 +15,9 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 	<!--Theme-->
 	<!--link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css"  /-->
 	<link href="/css/themes/<?php echo TEMA; ?>/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
-	<link href="/css/mods/<?php echo TEMA; ?>/mods.css" rel="stylesheet" type="text/css" />		
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
+	
+	<link href="/css/mods/rocket/mods.css" rel="stylesheet" type="text/css" />		
 	<!--link href="/css/themes/cobalt/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /-->		
 	
 	<!--Wijmo Widgets CSS-->	
@@ -61,8 +63,21 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 				$(this).removeClass('ui-state-hover');
 			});
 			
+			$('.header').mouseenter(function(){
+				$(this).addClass('ui-state-hover');
+			});			
+			$('.header').mouseleave(function(){
+				$(this).removeClass('ui-state-hover');
+			});
+			
+			
 			$("#splitter").wijsplitter({ orientation: "horizontal" });
 			
+			 $(".accesos_directos").wijcarousel({
+                display: 12,
+                step: 4,
+                orientation: "horizontal"
+            });
 			
 		});
 		
@@ -96,7 +111,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 	<div id="splitter">
 		<div class="main_header">
 			<div style="padding:0px 0 0px 0px; float:left;">
-				<!--a href="/admin/general/menu" id="lnkMenu" tablink="true" ><h1>America Airlines</h1></a-->
+				
 				<div class="header ui-state-default" style="text-align:center;padding-left: 13px;
 padding-right: 15px;
 margin-left: -4px;
@@ -105,21 +120,58 @@ border-bottom-right-radius: 10px;"><a href="/index"><h2 style="margin:8px;"><?ph
 					
 			<div class="user_widget" >
 				<a class ="left ui-state-default" href="/admin/user/perfil" tablink="true">Perfil</a>
-				<a class ="right ui-state-default" href="/admin/user/logout">Salir</a>
+				<a class ="right ui-state-default" href="/admin/user/logout" tablink="false">Salir</a>
 			</div>						
 			
 			<div class="accesos_directos">				
-				
-				<div class="item" style="float:right;margin-right:20px;">
-					<a href="/admin/pedidoi/edicion_articulo" tablink="true" ><img width="60px" src="/images/admin/icons/diagram_v2_06.png" /><label style='padding-left:10px;'>Productos</label></a>
-				</div>
-				
-				<div class="item" style="float:right;margin-right:20px;">
-					<a href="/admin/pedidoi/nuevo" tablink="true" ><img width="60px" src="/images/admin/icons/diagram_v2_26.png" /><label>Nuevo Pedido</label></a>
-				</div>
-				<div class="item" style="float:right;margin-right:20px;">
-					<a href="/admin/pedidoi/verpedidos" tablink="true" ><img width="60px" src="/images/admin/icons/diagram_v2_17.png" /><label style='padding-left:15px;'>Pedidos</label></a>
-				</div>
+				<ul>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/card-id.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/productos/listar" tablink="true" width="60px" src="/images/supermono/tag.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					<li>						
+						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+					</li>
+					
+				</ul>
 			</div>
 		</div>
 		<div id="tabs">

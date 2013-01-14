@@ -14,7 +14,11 @@
 		
 	});
 </script>
-<?php include_once('../admin/vistas/pedidoi/lista_toolbar.php') ?>
+<?php 
+	//include_once('../app/vistas/pedidoi/lista_toolbar.php') 
+	global $_PETICION;
+	$this->mostrar($_PETICION->controlador.'/lista_toolbar');
+?>
 <div style="">	
 	<table id="lista_pedidos_internos">
 		<thead>

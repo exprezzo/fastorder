@@ -1,3 +1,9 @@
+.wijmo-wijsplitter-h-expander{
+	top:11px !important;
+}
+.wijmo-wijsplitter-h-panel1-collapsed{
+	top:6px !important;
+}
 
 .frmPedido{ position:relative; }
 .frmPedido .pnlEdicionArticulo{ position:absolute; visibility:hidden; }

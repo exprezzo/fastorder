@@ -151,7 +151,7 @@
 			}
 			
 			.body{
-				background:white url('/images/backgrounds/6_Free_Badge_Templates.jpg') !important;
+				background:white url('/images/backgrounds/1350436861_colorful_wood_background.jpg') !important;
 				background-size:100% 100%;
 				background-attachment: fixed;
 			}
@@ -164,6 +164,11 @@
 				border: none 0;
 				height: 277px;
 				width:454px;
+				opacity:.8;
+			}
+			
+			form:hover{
+				opacity:1;
 			}
 			
 			.header{
@@ -171,7 +176,7 @@
 				border: none;
 				background: none;
 				margin-top: 30px;
-				left: 178px;
+				left: 192px;
 				position: absolute;
 				box-shadow:none;
 			}
@@ -186,6 +191,7 @@
 			.inputbox input{
 				text-align:center;
 				width: 203px;
+				border-radius:6px;
 			}
 			
 			.btnEntrar{
@@ -204,7 +210,7 @@
 
 	<body onload="" style="" class="body">		
 		<form id="forLogin" action="/admin/user/login" method="POST" >
-			<div class="header ui-state-default" style="text-align:center;"><?php echo NOMBRE_APL; ?></div>			
+			<div class="header ui-state-default" style="text-align:center;">LOGIN</div>			
 			
 			<div class="contenido">
 				
