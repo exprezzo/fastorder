@@ -67,8 +67,10 @@
 				
 			}
 			.inputBox input{
-				width:300px;
+				width:203px;
 				border:1px solid #CCC !important;				
+				padding-right:0;
+				padding-left:0;
 			}
 			label{
 				width:100px;
@@ -167,6 +169,13 @@
 				opacity:.8;
 			}
 			
+			form{				
+				transition:opacity .5s;
+				-moz-transition:opacity .5s; /* Firefox 4 */
+				-webkit-transition:opacity .5s; /* Safari and Chrome */
+				-o-transition:opacity .5s; /* Opera */
+				
+			}
 			form:hover{
 				opacity:1;
 			}
@@ -189,9 +198,12 @@
 			}
 			
 			.inputbox input{
-				text-align:center;
+				text-align: center;
 				width: 203px;
 				border-radius:6px;
+			}
+			input{
+				text-align:center;
 			}
 			
 			.btnEntrar{

@@ -6,7 +6,7 @@
 	
 	
 </style>
-<script src="/js/catalogos/pedidos/edicion_pedido.js"></script>
+<script src="/js/admin/catalogos/pedidos/edicion_pedido.js"></script>
 <script>
 	$( function(){
 		var tabId="<?php echo $_REQUEST['tabId']; ?>";
@@ -17,7 +17,7 @@
 
 	});
 </script>
-<?php include_once('../app/vistas/pedidoi/toolbar.php'); ?>
+<?php $this->mostrar('pedidoi/toolbar'); ?>
 <!--div >
 	<button class='btnGuardar'>Guardar</button>
 	<button class='btnEliminar'>Eliminar</button>
@@ -60,7 +60,7 @@
 			<hr></hr>
 			<h3 style='position:absolute;top:-31px; left:40px;border:0px;' class='ui-widget-content'>Art&iacute;culos del Pedido</h3>
 		</div>
-		<?php include_once('../app/vistas/pedidoi/toolbar_articulos.php'); ?>
+		<?php $this->mostrar('pedidoi/toolbar_articulos'); ?>
 		<table class="grid_articulos" style="">
 			<thead>
 				<th>Producto</th> 
@@ -83,6 +83,7 @@
 			<hr></hr>
 			<h3 style='position:absolute;top:-31px; left:40px;border:0px;' class='ui-widget-content'>Art&iacute;culo</h3>
 		</div>
-		<?php include_once('../app/vistas/pedidoi/edicion_articulo.php'); ?>
+		<?php $this->mostrar('pedidoi/edicion_articulo'); ?>
+		
 	</div>
 </div>

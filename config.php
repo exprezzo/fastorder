@@ -10,19 +10,39 @@ $DB_CONFIG=array(
 
 // Configuracion del ssitio
 define ("NOMBRE_APL",'LA MONA');
-define ("TEMA",'blitzer');
+define ("TEMA",'rocket');
+
+$_TEMAS=array();
+
+$_TEMAS['artic']="http://cdn.wijmo.com/themes/arctic/jquery-wijmo.css";
+$_TEMAS['midnight']="http://cdn.wijmo.com/themes/midnight/jquery-wijmo.css";
+$_TEMAS['aristo']="http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css";
+$_TEMAS['rocket']="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css";
+$_TEMAS['cobalt']="http://cdn.wijmo.com/themes/cobalt/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['blitzer']="http://cdn.wijmo.com/themes/blitzer/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
+$_TEMAS['sterling']="http://cdn.wijmo.com/themes/sterling/jquery-wijmo.css";
 /*
 Temas disponibles:   (la intencion es agregar todos los temas de jqureyui y de wijmo, pero no queremos ser dependientes de sus servicios web)
-aristo
-artic
-cobalt
+
 flick
-midnight
-rocket
-sterling
+
 ui-lightness
 
-blitzer
 */
 
 

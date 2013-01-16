@@ -14,8 +14,14 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 	<script src="/js/libs/jquery-ui-1.9.2.custom/jquery-ui-1.9.2.custom.js"></script>  
 	<!--Theme-->
 	<!--link href="http://cdn.wijmo.com/themes/rocket/jquery-wijmo.css" rel="stylesheet" type="text/css"  /-->
-	<link href="/css/themes/<?php echo TEMA; ?>/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
-	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
+	<?php 
+		global $_TEMAS;
+		$rutaTema=$_TEMAS[TEMA];
+		//$this->getRutaTema();
+	?>
+	
+	<link href="shttp://cdn.wijmo.com/themes/arctic/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
+	<link href="<?php echo $rutaTema; ?>" rel="stylesheet" type="text/css" />
 	
 	<link href="/css/mods/rocket/mods.css" rel="stylesheet" type="text/css" />		
 	<!--link href="/css/themes/cobalt/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /-->		
@@ -79,7 +85,9 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
                 orientation: "horizontal"
             });
 			
+			
 		});
+		
 		
 	</script>
 	<style type="text/css">
@@ -104,6 +112,19 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 			width: 100%;
 			border: 0;
 		}
+		
+		body{
+			-background:blue !important;
+		}
+		
+		.wijmo-wijsplitter-h-panel1.ui-resizable{
+				transition:height .5s;
+				-moz-transition:height .5s; /* Firefox 4 */
+				-webkit-transition:height .5s; /* Safari and Chrome */
+				-o-transition:height .5s; /* Opera */		
+				
+		}
+				
 	</style>
 	
 </head>
@@ -135,7 +156,7 @@ border-bottom-right-radius: 10px;"><a href="/index"><h2 style="margin:8px;"><?ph
 						<img href="/admin/productos/listar" tablink="true" width="60px" src="/images/supermono/tag.png" /><label style='padding-left:10px;'>Productos</label></img>
 					</li>
 					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
+						<img href="/admin/general/chat" tablink="true" width="60px" src="/images/supermono/comment.png" /><label style='padding-left:10px;'>Productos</label></img>
 					</li>
 					<li>						
 						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>

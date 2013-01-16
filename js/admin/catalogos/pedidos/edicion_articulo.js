@@ -23,7 +23,7 @@ var EdicionArticulo=function (tabId){
 
 		var dataSource = new wijdatasource({
 			proxy: new wijhttpproxy({
-				url: "/pedidoi/getListaArticulos",
+				url: "/admin/pedidoi/getListaArticulos",
 				dataType: "json"				
 			}),
 			dynamic:true,			
@@ -112,7 +112,7 @@ var EdicionArticulo=function (tabId){
 		var myReader = new wijarrayreader(fields);
 		
 		var proxy = new wijhttpproxy({
-			url: "/pedidoi/getArticulos",
+			url: "/admin/pedidoi/getArticulos",
 			dataType:"json"			
 		});
 		
@@ -180,7 +180,7 @@ var EdicionArticulo=function (tabId){
 		var myReader = new wijarrayreader(fields);
 		
 		var proxy = new wijhttpproxy({
-			url: "/pedidoi/getUnidadesMedida",
+			url: "/admin/pedidoi/getUnidadesMedida",
 			dataType:"json"			
 		});
 		
@@ -247,7 +247,7 @@ var EdicionArticulo=function (tabId){
 		var myReader = new wijarrayreader(fields);
 		
 		var proxy = new wijhttpproxy({
-			url: "/pedidoi/getArticulos",
+			url: "/admin/pedidoi/getArticulos",
 			dataType:"json"			
 		});
 		

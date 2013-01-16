@@ -20,11 +20,11 @@
 			click: function (e, cmd) {
 				switch(cmd.commandName){
 					case 'nuevo':
-						TabManager.add('/pedidoi/nuevo','Nuevo Pedido');				
+						TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
 					break;
 					case 'editar':
 						if (me.selected!=undefined){													
-							TabManager.add('/pedidoi/getPedido','Editar Pedido',me.selected.id);
+							TabManager.add('/admin/pedidoi/getPedido','Editar Pedido',me.selected.id);
 						}
 					break;
 					case 'eliminar':
@@ -143,7 +143,7 @@
 			$('#lista_pedidos_internos tr').bind('dblclick', function (e) { 			
 				var pedidoId=$(e.currentTarget).attr('pedidoId');
 				if (pedidoId==undefined || pedidoId=='' || pedidoId==0) return false;				
-				TabManager.add('/pedidoi/getPedido','Editar Pedido',pedidoId);				
+				TabManager.add('/admin/pedidoi/getPedido','Editar Pedido',pedidoId);				
 			});			
 		} });
 	};

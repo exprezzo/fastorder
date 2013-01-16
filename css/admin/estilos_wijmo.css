@@ -1,22 +1,28 @@
+
+.nombre_empresa_header{
+	cursor:pointer;
+}
 .wijmo-wijsplitter-h-expander{
 	top:11px !important;
+	left:20px;
+	position:absolute;
+	-visibility:hidden;
 }
+ .wijmo-wijsplitter-h-panel1-expanded{
+	left:10px;
+ }
 .wijmo-wijsplitter-h-panel1-collapsed{
 	top:6px !important;
 }
-
 .frmPedido{ position:relative; }
 .frmPedido .pnlEdicionArticulo{ position:absolute; visibility:hidden; }
 .frmPedido .pnlArticulos{  }
 .frmPedido .cardArticulos{position:relative;}
-
 .accesos_directos  label{ opacity: 0;	display: block;	text-align: center; position:absolute; }
 .accesos_directos  .item{ float:right;margin-right:20px; width:60px;}
 .accesos_directos  a{ text-decoration:none;}
 .accesos_directos  img{ display:inline-block;}
-
 #menu_principal label{opacity:0;text-align:center; }
-
 .ui-tabs-panel{/* -background-color:white !important; */}
 .ui-button { position: relative; }
 span.ui-button-text { padding-top:40px !important; background-repeat: no-repeat; background-position: top center; background-position:center 6px !important; }
@@ -25,7 +31,7 @@ span.ui-button-text { padding-top:40px !important; background-repeat: no-repeat;
 .ui-tabs-nav{ min-height:47px; }
 .ui-tabs{padding:0;}
 ul.ui-tabs-nav li a{ background-size:32px; }
-ul.ui-tabs-nav li a { padding-top: 14px !important; padding-left: 38px !important; background-repeat: no-repeat; padding-bottom: 12px !important; background-position:5px;	}
+ul.ui-tabs-nav li a { -padding-top: 14px !important; -padding-bottom: 14px !important; padding-left: 38px !important; background-repeat: no-repeat;background-position:5px;	}
 ul.ui-tabs-nav li a.listaReservaciones{ background-image:url('/images/admin/aero/plane_tickets.png'); }
 ul.ui-tabs-nav li a.welcome{ background-image:url('/images/admin/home.png'); }
 
@@ -87,4 +93,113 @@ margin-bottom: -5px;
 background: none;
 border: 0;
 height: 0;
+}
+
+#tabs  {
+	overflow: visible !important
+}
+
+#tabs > div{
+	
+}
+
+#tabs > ul > li {
+	padding-bottom:3px;
+}
+
+
+#tabs > ul{
+	width:auto !important;
+	
+	-padding:5px 14px 0 5px;
+	
+	border-radius:9px 9px 0 0;
+	-position:absolute;
+	-margin-top:-59px;
+	-background:none;
+	border:none;
+}
+
+
+
+/**/
+body{
+	font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+	-background: #white url(images/stripe2.png);
+	
+	-background: white url('/images/backgrounds/8cq9868et6.jpg') !important;
+	-background: white url('/images/backgrounds/3205696065_203c3c47c6_b.jpg') !important;
+	background-size:100%;
+	background-attachment:fixed ;
+}
+/* .header, .user_widget a.left, .user_widget a.right{
+	opacity:.5;
+	opacity:1;
+	background-color:#00a6dd ;
+
+-moz-box-shadow: inset 1px 1px 0 rgba(255,255,255,0.15);
+-webkit-box-shadow: inset 1px 1px 0 rgba(255,255,255,0.15);
+box-shadow: inset 1px 1px 0 rgba(255,255,255,0.15);
+border: 1px solid #00a6dd;
+background: #00a6dd url(images/ui-bg_highlight-soft_35_00a6dd_1x100.png) 50% 50% repeat-x;
+font-weight: normal;
+color: #fafafa;
+}*/
+
+.header a{
+	color: #fafafa;
+	text-decoration: none;
+}
+.accesos_directos{
+	overflow: hidden;
+position: absolute !important;
+width: 808px;
+height: 60px;
+left:50%;
+margin-left:-435px;
+position:absolute;
+margin-top:-2px;
+background: none !important;
+
+}
+.accesos_directos img{
+	opacity:.7;
+	
+}
+
+.accesos_directos img:hover{
+	opacity:1;
+}
+.header:hover, .user_widget a:hover{
+	opacity:1;
+	
+}
+
+.main_header, #tabs {		
+	-background:none;
+	
+	
+}
+
+#tabs{		
+	
+	padding:25px 10px 10px 10px;
+	border:none;
+}
+
+#tabs > ul{
+	width:100%;
+}
+
+#tabs  .ribbon.tbPedidos{ margin-top:-25px; }
+
+.pnlArticulos hr{ border-width:0 !important; }
+.pnlArticulos  h3{ top:-40px !important;}
+
+#tabs > div{
+	background-color:white;
+	/* border:1px solid black !important;
+	margin-top:20px !important; 
+	border-radius:7px; */
+	width:100%;
 }

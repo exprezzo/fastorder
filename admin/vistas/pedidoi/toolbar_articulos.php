@@ -1,5 +1,7 @@
+<?php $tabId=$_REQUEST['tabId']; ?>
 <div class="ribbon tbArticulos">
 	<ul>
+		
 		 <li><a href="#tbArticulos_<?php echo $tabId; ?>">Acciones</a>x</li>
 	</ul>
 	<div class="" id="tbArticulos_<?php echo $tabId; ?>">

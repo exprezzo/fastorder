@@ -3,3 +3,13 @@ Background de madera
 http://u9441012.letitbit.net/download3.php
 Madera icons
 http://www.heroturko.me/iconss/2117880-grunge-striped-social-media-icon-pack-ico-png.html
+
+twiter theme
+http://addyosmani.com/blog/jquery-ui-bootstrap/
+
+efectos css3
+http://tympanus.net/Tutorials/OriginalHoverEffects/index5.html
+http://tympanus.net/codrops/2011/11/07/animated-buttons-with-css3/
+
+
+http://wijmo.com/demo/explore/?widget=Grid&sample=Custom%20Editing

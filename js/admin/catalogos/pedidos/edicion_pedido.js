@@ -47,7 +47,7 @@ var EdicionPedido={
 		
 		$.ajax({
 			type: "POST",
-			url: '/pedidoi/guardar',
+			url: '/admin/pedidoi/guardar',
 			data: { pedido: pedido}
 		}).done(function( response ) {
 			
@@ -106,7 +106,7 @@ var EdicionPedido={
 		var myReader = new wijarrayreader(fields);
 		
 		var proxy = new wijhttpproxy({
-			url: "/pedidoi/getAlmacenes",
+			url: "/admin/pedidoi/getAlmacenes",
 			dataType:"json"			
 		});
 		
@@ -166,7 +166,7 @@ var EdicionPedido={
 			click: function (e, cmd) {
 				switch(cmd.commandName){
 					case 'nuevo':
-						TabManager.add('/pedidoi/nuevo','Nuevo Pedido');				
+						TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
 					break;
 					case 'guardar':
 						me.guardar();

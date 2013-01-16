@@ -10,6 +10,13 @@ var TabManager={
 			var index = $('li', $tabs).index($(this).parent());
 			$tabs.wijtabs('remove', index);
 		});
+		
+		
+		this.refresLayout();
+	},
+	refresLayout:function(){
+		
+		$('#tabs').height(screen.height);
 	},
 	add:function(url,titulo,id){
 		id = id || 0;

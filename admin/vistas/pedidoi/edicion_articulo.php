@@ -1,4 +1,4 @@
-<script src="/js/catalogos/pedidos/edicion_articulo.js"></script>
+<script src="/js/admin/catalogos/pedidos/edicion_articulo.js"></script>
 <script>
 	$(function(){
 		var  tabId="<?php echo $_REQUEST['tabId']; ?>";
@@ -6,7 +6,7 @@
 		 frmEdicionArticulo.init(tabId);
 	});
 </script>
-<?php include_once('../app/vistas/pedidoi/toolbar_articulo.php'); ?>
+<?php include_once('../admin/vistas/pedidoi/toolbar_articulo.php'); ?>
 <form>	
 	<div class="inputBox" style='margin-bottoms:5px;'>		
 		<label>Articulo:</label>

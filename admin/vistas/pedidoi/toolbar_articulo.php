@@ -1,3 +1,4 @@
+<?php $tabId=$_REQUEST['tabId']; ?>
 <div class="ribbon tbEdicionArticulo">
 	<ul>
 		 <li><a href="#tbEdicionArticulo_<?php echo $tabId; ?>">Format</a></li>
