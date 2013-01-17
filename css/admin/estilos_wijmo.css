@@ -18,10 +18,7 @@
 .frmPedido .pnlEdicionArticulo{ position:absolute; visibility:hidden; }
 .frmPedido .pnlArticulos{  }
 .frmPedido .cardArticulos{position:relative;}
-.accesos_directos  label{ opacity: 0;	display: block;	text-align: center; position:absolute; }
-.accesos_directos  .item{ float:right;margin-right:20px; width:60px;}
-.accesos_directos  a{ text-decoration:none;}
-.accesos_directos  img{ display:inline-block;}
+
 #menu_principal label{opacity:0;text-align:center; }
 .ui-tabs-panel{/* -background-color:white !important; */}
 .ui-button { position: relative; }
@@ -48,6 +45,10 @@ form{ padding:10px }
 .user_widget a{ padding-top:10px; height: 30px;	display: inline-block; vertical-align: middle; text-decoration:none; font-weight:bold !important; border-top:0; }
 .user_widget a.left{	padding-left:30px;	padding-right:13px;	border-bottom-left-radius: 10px; }
 .user_widget a.right{ padding-left:13px;	padding-right:30px;	margin-left:-4px; border-bottom-right-radius:10px; }
+.header:hover, .user_widget a:hover{	opacity:1;}
+
+.header_empresa{ padding-left:13px;	padding-right:30px;	margin-left:-4px; border-bottom-right-radius:10px; }
+.header_empresa{ padding-top:10px; height: 30px;	display: inline-block; vertical-align: middle; text-decoration:none; font-weight:bold !important; border-top:0; }
 
 .ribbon .ui-tabs-nav{
 	display:none; 
@@ -146,39 +147,19 @@ font-weight: normal;
 color: #fafafa;
 }*/
 
-.header a{
-	color: #fafafa;
-	text-decoration: none;
-}
-.accesos_directos{
-	overflow: hidden;
-position: absolute !important;
-width: 808px;
-height: 60px;
-left:50%;
-margin-left:-435px;
-position:absolute;
-margin-top:-2px;
-background: none !important;
+/* .header a{color: #fafafa;text-decoration: none;} */
+.accesos_directos  label{ opacity: 0;	display: block;	text-align: center; position:absolute; }
+.accesos_directos  .item{ float:right;margin-right:20px; width:60px;}
+.accesos_directos  a{ text-decoration:none;}
+.accesos_directos  img{ display:inline-block;}
+.accesos_directos{overflow: hidden;position: absolute !important;width: 808px;height: 60px; left:50%; margin-left:-435px; position:absolute; margin-top:-2px;background: none !important; }
+.accesos_directos img{opacity:.7;}
+.accesos_directos img:hover{	opacity:1;}
 
-}
-.accesos_directos img{
-	opacity:.7;
-	
-}
 
-.accesos_directos img:hover{
-	opacity:1;
-}
-.header:hover, .user_widget a:hover{
-	opacity:1;
-	
-}
 
 .main_header, #tabs {		
-	-background:none;
-	
-	
+	-background:none;	
 }
 
 #tabs{		

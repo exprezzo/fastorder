@@ -7,7 +7,7 @@ var EdicionArticulo=function (tabId){
 		this.configurarFormulario(tabId);	
 		this.configurarGrid(tabId);	
 		this.configurarComboDestino(tabId);
-		this.configurarToolbar(tabId);		
+	//	this.configurarToolbar(tabId);		
 	};
 	
 	this.configurarGrid=function(tabId){
@@ -54,7 +54,9 @@ var EdicionArticulo=function (tabId){
 				{ dataKey: "id", hidden:true, visible:false, headerText: "ID" },
 				{dataKey: "nombre", headerText: "Articulo"},
 				{dataKey: "cantidad", headerText: "Cantidad"},
-				{dataKey: "cantidad", headerText: "Cantidad"}
+				{dataKey: "um", headerText: "um"},
+				{dataKey: "fk_articulo", headerText: "fk_articulo", visible:false},
+				{dataKey: "fk_um", headerText: "fk_um", visible:false}
 			],
 			rowStyleFormatter: function(args) {
 				if (args.dataRowIndex>-1)
@@ -78,22 +80,27 @@ var EdicionArticulo=function (tabId){
 		} });
 		
 		gridPedidos.wijgrid({ loaded: function (e) { 
-			$(tabId+' .grid_articulos tr').bind('dblclick', function (e) { 																							
-				me.mostrarTabEdicionArticulo();
+			$(tabId+' .grid_articulos tr').bind('dblclick', function (e) { 																											
+				var position = $(e.currentTarget).position();				
+				$('.frmEditInlinePedido').css('visibility','visible');				
+				$('.frmEditInlinePedido').css('top',position.top+'px');
+			//	$('.frmEditInlinePedido').css('left',position.left+'px');				
+				me.editar();
 			});			
 		} });
 	};
+	
 	this.configurarFormulario=function(tabId){
-		 $(tabId+" .txtCantidad").wijinputnumber( 
-        {
-            type: 'numeric',
-            minValue: -100,
-            maxValue: 1000,
-            decimalPlaces: 4,
-            showSpinner: true
-        });		
-		this.configurarComboArticulos(tabId);
-		this.configurarComboUM(tabId);
+		 // $(tabId+" .txtCantidad").wijinputnumber( 
+        // {
+            // type: 'numeric',
+            // minValue: -100,
+            // maxValue: 1000,
+            // decimalPlaces: 4,
+            // showSpinner: true
+        // });		
+		// this.configurarComboArticulos(tabId);
+		// this.configurarComboUM(tabId);
 	};
 	this.configurarComboArticulos=function(tabId){		
 		var fields=[{
@@ -302,12 +309,20 @@ var EdicionArticulo=function (tabId){
 		//Posicionar tab Edicion articulo
 		this.mostrarTab(0);
 	};
+	this.editar=function(){
+		console.log(this.selected);
+		//Cargar los datos en el editor
+		
+		$(this.tabId+' .frmEditInlinePedido .txtCantidad').val(this.selected.cantidad);
+		$(this.tabId+' .frmEditInlinePedido .cmbArticulo').val(this.selected.fk_articulo);
+		
+	};
 	this.mostrarTabEdicionArticulo=function(){
 		var data=this.selected;
 		this.mostrarTab(1, data);
 	};
 	this.mostrarTab=function(tabIndex, data){
-		console.log("data"); console.log(data);
+		
 		var tabId = this.tabId;
 		var elJQ=$(tabId+' .pnlArticulos');
 		var alto= elJQ.height();
@@ -327,19 +342,17 @@ var EdicionArticulo=function (tabId){
 			pnlArt.css('visibility','visible');
 			$(tabId+' .pnlArticulos').css('visibility','hidden');
 			
-		}
-		
-	
+		}		
 	};
-	this.configurarToolbar=function(tabId){		
+	this.configurarToolbar=function(tabId){
 		var me=this;
 		$(tabId+ " .tbArticulos").wijribbon({
 			click: function (e, cmd) {
 				switch(cmd.commandName){
-					case 'nuevo':										
-						me.mostrarTabEdicionArticulo();						
+					case 'nuevo':
+						me.mostrarTabEdicionArticulo();
 					break;
-					default:						
+					default:
 						$.gritter.add({
 							position: 'bottom-left',
 							title:"Informaci&oacute;n",

@@ -10,6 +10,8 @@ class Pedidoi extends Controlador{
 		}	
 		return $this->modObj;
 	}
+	
+	
 	function verPedido(){		
 		$idPedido=empty($_REQUEST['id'])? 0 : $_REQUEST['id'];		
 		$pedido=$this->getPedido($idPedido);		
@@ -18,12 +20,46 @@ class Pedidoi extends Controlador{
 		$datos=array();
 		$datos[]=array(
 			'id'=>1,
-			'nombre'=>'Papas',
-			'fk_articulo'=>11,
-			'cantidad'=>8,
+			'nombre'=>'Papas1',
+			'fk_articulo'=>1,
+			'cantidad'=>11,
 			'um'=>'Kg',
 			'fk_um'=>21		
 		);
+		
+		$datos[]=array(
+			'id'=>2,
+			'nombre'=>'Papas2',
+			'fk_articulo'=>2,
+			'cantidad'=>3,
+			'um'=>'Kg',
+			'fk_um'=>21		
+		);
+		$datos[]=array(
+			'id'=>3,
+			'nombre'=>'Papas3',
+			'fk_articulo'=>3,
+			'cantidad'=>2,
+			'um'=>'Kg',
+			'fk_um'=>21		
+		);
+		$datos[]=array(
+			'id'=>4,
+			'nombre'=>'Papas4',
+			'fk_articulo'=>4,
+			'cantidad'=>81,
+			'um'=>'Kg',
+			'fk_um'=>21		
+		);
+		$datos[]=array(
+			'id'=>5,
+			'nombre'=>'Papas5',
+			'fk_articulo'=>5,
+			'cantidad'=>24,
+			'um'=>'Kg',
+			'fk_um'=>21		
+		);
+		
 		$res=array(
 			'datos'=>$datos,
 			'total'=>1
@@ -64,10 +100,10 @@ class Pedidoi extends Controlador{
 	function nuevoPedido(){
 		return $this->nuevo();
 	}
-	function nuevo(){
-		$vista=$this->getVista();
-		$vista->mostrar('pedidoi/pedidoi');
-	}
+	// function nuevo(){
+		// $vista=$this->getVista();
+		// $vista->mostrar('pedidoi/pedidoi');
+	// }
 	function getPedido($id = null){
 		if ($id==null){
 			$idPedido=$_REQUEST['pedidoId'];

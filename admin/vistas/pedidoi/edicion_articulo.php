@@ -6,22 +6,48 @@
 		 frmEdicionArticulo.init(tabId);
 	});
 </script>
-<?php include_once('../admin/vistas/pedidoi/toolbar_articulo.php'); ?>
-<form>	
-	<div class="inputBox" style='margin-bottoms:5px;'>		
-		<label>Articulo:</label>
-		<select class="cmbArticulo" style='width:170px;'>			
+<div class="frmEditInlinePedido" style="">
+
+	<form>
+		<select class="cmbArticulo" placeholder="Articulo">
+			<option value="1">a</option>
+			<option value="2">b</option>
+			<option value="3">c</option>
+			<option value="4">d</option>
+		</select>				
+		<input placeholder="cantidad" class="txtCantidad"/>
+		<select placeholder="Unidad de Medida" class="cmbUm">
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+			<option>D</option>
 		</select>
-	</div>	
-	
-	<div class="inputBox" style='margin-bottoms:5px;'>
-		<label >Cantidad:</label>
-		<input type='text' name='cantidad' class="txtCantidad" value="" />
+	</form>
+	<div class="toolbarFormPedidoInline">
+
+		<div style="text-align:center;" class="boton btnNew">
+			<div class="iconWrap">		
+				<div class="icon"></div>
+			</div>
+			<div class="wrapText">
+				<span>Guardar</span>
+			</div>		
+		</div>
+		<div style="text-align:center;" class="boton btnEdit">
+			<div class="iconWrap">		
+				<div class="icon"></div>
+			</div>
+			<div class="wrapText">
+				<span>Cancelar</span>
+			</div>		
+		</div>				
+		<div style="text-align:center;" class="boton btnDelete">
+			<div class="iconWrap">		
+				<div class="icon"></div>
+			</div>
+			<div class="wrapText">
+				<span>Borrar</span>
+			</div>		
+		</div>			
 	</div>
-	
-	<div class="inputBox" style='margin-bottoms:5px;'>		
-		<label>UM:</label>
-		<select class="cmbUM" style='width:170px;'>			
-		</select>
-	</div>	
-</form>	
+</div>

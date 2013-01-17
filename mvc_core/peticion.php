@@ -31,11 +31,11 @@ class Peticion{
 		
 		switch($size){
 			case 1:		//no Escribio nada
-				$controlador='pages';
+				$controlador=DEFAULT_CONTROLLER;
 				$accion		='index';
 			break;
 			case 2:	// solo escribió un parametro  ( la accion )
-				$controlador='pages';
+				$controlador=DEFAULT_CONTROLLER;
 				$accion		=$xp[1];
 			break;			
 			case 3:	// escribió el controlador y la accion

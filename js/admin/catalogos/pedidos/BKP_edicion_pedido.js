@@ -1,6 +1,5 @@
-var EdicionPedido = function(){
-	this.init=function(tabId, pedidoId, almacen){		
-		
+var EdicionPedido={	
+	init:function(tabId, pedidoId, almacen){		
 		tabId = '#'+tabId;
 		this.tabId=tabId;
 		var tab=$('div'+tabId);
@@ -25,14 +24,16 @@ var EdicionPedido = function(){
 		this.configurarFormulario(tabId);
 		this.configurarToolbar(tabId);
 		// this.configurarListaArticulos(tabId);
-	};
-	this.nuevo=function(){
+	},
+	nuevo:function(){
 		var tabId=this.tabId;
 		var tab = $('#tabs '+tabId);
 		$('a[href="'+tabId+'"]').html('Nuevo Pedido');
 		tab.find('.txtId').val(0);
-	};	
-	this.guardar=function(){
+	},
+	// cargarValoresIniciales:function(){
+	// },
+	guardar:function(){
 		var tabId=this.tabId;
 		var tab = $('#tabs '+tabId);
 		var me=this;
@@ -77,8 +78,14 @@ var EdicionPedido = function(){
 				class_name: 'my-sticky-class'
 			});
 		});
-	};	
-	this.configurarFormulario=function(tabId){
+	},
+	editar:function(){
+		alert("editar");
+	},
+	eliminar:function(){
+		alert("editar");
+	},	
+	configurarFormulario:function(tabId){
 		$('#tabs '+tabId+' .txtFecha').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true});		
 		
 		//COMBO
@@ -151,40 +158,39 @@ var EdicionPedido = function(){
 		
 		
 		
-	};
-	this.configurarToolbar=function(tabId){		
-			
-			var me=this;
-			$(tabId+ "> .tbPedido").wijribbon({
-				click: function (e, cmd) {
-					switch(cmd.commandName){
-						case 'nuevo':
-							TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
-						break;
-						case 'guardar':
-							me.guardar();
-						break;
-						case 'eliminar':
-							me.nuevo();
-						break;
-						
-						default:						
-							$.gritter.add({
-								position: 'bottom-left',
-								title:"Informaci&oacute;n",
-								text: "Acciones del toolbar en construcci&oacute;n",
-								image: '/images/info.png',
-								class_name: 'my-sticky-class'
-							});
-						break;
-					}
-					
-				}
-			});
-			
-			
-			
-	};
+	},
+	configurarToolbar:function(tabId){		
 		
+		var me=this;
+		$(tabId+ "> .tbPedido").wijribbon({
+			click: function (e, cmd) {
+				switch(cmd.commandName){
+					case 'nuevo':
+						TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
+					break;
+					case 'guardar':
+						me.guardar();
+					break;
+					case 'eliminar':
+						me.nuevo();
+					break;
+					
+					default:						
+						$.gritter.add({
+							position: 'bottom-left',
+							title:"Informaci&oacute;n",
+							text: "Acciones del toolbar en construcci&oacute;n",
+							image: '/images/info.png',
+							class_name: 'my-sticky-class'
+						});
+					break;
+				}
+				
+			}
+		});
+		
+		
+		
+	}
 	
 }

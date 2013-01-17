@@ -20,7 +20,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 		//$this->getRutaTema();
 	?>
 	
-	<link href="shttp://cdn.wijmo.com/themes/arctic/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" />
+	<!--link href="http://cdn.wijmo.com/themes/arctic/jquery-wijmo.css" rel="stylesheet" type="text/css" title="rocket-jqueryui" /-->
 	<link href="<?php echo $rutaTema; ?>" rel="stylesheet" type="text/css" />
 	
 	<link href="/css/mods/rocket/mods.css" rel="stylesheet" type="text/css" />		
@@ -69,10 +69,10 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 				$(this).removeClass('ui-state-hover');
 			});
 			
-			$('.header').mouseenter(function(){
+			$('.header_empresa').mouseenter(function(){
 				$(this).addClass('ui-state-hover');
 			});			
-			$('.header').mouseleave(function(){
+			$('.header_empresa').mouseleave(function(){
 				$(this).removeClass('ui-state-hover');
 			});
 			
@@ -84,6 +84,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
                 step: 4,
                 orientation: "horizontal"
             });
+			
 			
 			
 		});
@@ -112,31 +113,23 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 			width: 100%;
 			border: 0;
 		}
-		
-		body{
-			-background:blue !important;
-		}
+
 		
 		.wijmo-wijsplitter-h-panel1.ui-resizable{
 				transition:height .5s;
 				-moz-transition:height .5s; /* Firefox 4 */
 				-webkit-transition:height .5s; /* Safari and Chrome */
-				-o-transition:height .5s; /* Opera */		
-				
+				-o-transition:height .5s; /* Opera */					
 		}
-				
+		#tabs > ul{display:none;}
 	</style>
 	
 </head>
-<body style="padding:0; margin:0;">	
+<body style="padding:0; margin:0;" class="ui-widget-content" >	
 	<div id="splitter">
 		<div class="main_header">
-			<div style="padding:0px 0 0px 0px; float:left;">
-				
-				<div class="header ui-state-default" style="text-align:center;padding-left: 13px;
-padding-right: 15px;
-margin-left: -4px;
-border-bottom-right-radius: 10px;"><a href="/index"><h2 style="margin:8px;"><?php echo NOMBRE_APL; ?><a></h2></div>			
+			<div style="padding:0px 0 0px 0px; float:left;position:relative;">
+				<a class="header_empresa ui-state-default" href="/index"><span style="margin:8px;"><?php echo NOMBRE_APL; ?></span></a>
 			</div>	
 					
 			<div class="user_widget" >
@@ -144,56 +137,7 @@ border-bottom-right-radius: 10px;"><a href="/index"><h2 style="margin:8px;"><?ph
 				<a class ="right ui-state-default" href="/admin/user/logout" tablink="false">Salir</a>
 			</div>						
 			
-			<div class="accesos_directos">				
-				<ul>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/card-id.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/productos/listar" tablink="true" width="60px" src="/images/supermono/tag.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/general/chat" tablink="true" width="60px" src="/images/supermono/comment.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					<li>						
-						<img href="/admin/pedidoi/lista_de_pedidos" tablink="true" width="60px" src="/images/supermono/paste.png" /><label style='padding-left:10px;'>Productos</label></img>
-					</li>
-					
-				</ul>
-			</div>
+			<?php $this->mostrar('general/accesos_directos'); ?>
 		</div>
 		<div id="tabs">
 			 <ul>			
