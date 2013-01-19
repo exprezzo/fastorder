@@ -12,8 +12,9 @@
 	.toolbarFormPedido span{ margin-top: 5px;display: inline-block;border-radius: 6px;	padding: 0px 6px 0px 6px;border: #e3e2d9 1px solid;font-family:arial; color:white; font-size: 12px; font-family: cursive; }
 	.iconWrap{	border: #9b9b9b 1px solid; display: inline-block; border-radius: 45px; padding: 2px; }
 	.iconWrap .icon{ width: 20px;height: 20px; background-color: rgb(228, 226, 226); background-repeat: no-repeat; background-position: 50%; border-radius: 45px; padding: 3px; }
-	.boton.btnNew .icon{ background: #8db817 url('/images/document_new.png') no-repeat scroll center;  }	
+	.boton.btnNew .icon{ background: #8db817 url('/images/document_new.png') no-repeat scroll center;  }		
 	.boton.btnNew span{background: #8db817; }
+	
 	.boton.btnEdit .icon{background: #dbc512 url('/images/document_edit.png') no-repeat scroll center;}
 	.boton.btnEdit span{background-color: #dbc512;}
 	.boton.btnEmail .icon{background: #4f77b5 url('/images/pre_mail.png') no-repeat scroll center;}
@@ -26,9 +27,7 @@
 	div.frmPedido .paneles{padding:8px;}
 	div.frmPedido .pnlIzq{display: inline-block !important;} 
 	div.frmPedido .pnlDer{display: inline-block !important; margin-top: 3px; vertical-align: top;} 
-	
-
-	
+		
 	.frmEditInlinePedido{position:absolute;z-index:10;transition: all 1s;-visibility:hidden;margin-left:-8px; -webkit-transition: all .5s;}
 	.frmEditInlinePedido .cmbArticulo{width:226px;}	
 	.frmEditInlinePedido .txtCantidad{width:235px;}	
@@ -38,9 +37,8 @@
 	.toolbarFormPedidoInline .boton{border-radius:9px;	border:#e3e2d9 1px solid;display: inline-block; padding: 5px 3px 5px 3px; cursor:pointer; background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888; }
 	.toolbarFormPedidoInline span{margin-left:3px; margin-top: 5px;display: inline-block;border-radius: 6px;	padding: 0px 6px 0px 6px;border: #e3e2d9 1px solid;font-family:arial; color:white; font-size: 12px; font-family: cursive; }	
 	.toolbarFormPedidoInline .iconWrap{float:left; }
-	.boton.btnNew .icon{ background: #8db817 url('/images/document_new.png') no-repeat scroll center;  }
-	.toolbarFormPedidoInline .wrapText{display:inline; float:right; }
 	
+	.toolbarFormPedidoInline .wrapText{display:inline; float:right; }	
 	.toolbarFormPedidoInline .btnEdit{margin-left: 116px;text-align: center;margin-right: 112px;}
 </style>
 <script src="/js/admin/catalogos/pedidos/edicion_pedido.js"></script>

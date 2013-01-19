@@ -11,7 +11,7 @@ $DB_CONFIG=array(
 // Configuracion del ssitio
 define ("NOMBRE_APL",'LA MONA');
 define ("TEMA",'blitzer');
-
+define ("PASS_AES",'faztA3s');
 $_TEMAS=array();
 
 $_TEMAS['artic']="http://cdn.wijmo.com/themes/arctic/jquery-wijmo.css";

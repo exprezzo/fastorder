@@ -33,7 +33,7 @@
 				<span>Guardar</span>
 			</div>		
 		</div>
-		<div style="text-align:center;" class="boton btnEdit">
+		<div style="text-align:center;" class="boton btnCancel">
 			<div class="iconWrap">		
 				<div class="icon"></div>
 			</div>

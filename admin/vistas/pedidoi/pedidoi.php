@@ -61,7 +61,7 @@
 			<h3 style='position:absolute;top:-31px; left:40px;border:0px;' class='ui-widget-content'>Art&iacute;culos del Pedido</h3>
 		</div>
 		<?php $this->mostrar('pedidoi/toolbar_articulos'); ?>
-		<table class="grid_articulos" style="">
+		<table class="grid_articulos" style="width:800px !Important;">
 			<thead>
 				<th>Producto</th> 
 				<th>Cantidad</th>

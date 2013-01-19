@@ -8,8 +8,20 @@ var EdicionArticulo=function (tabId){
 		this.configurarGrid(tabId);	
 		this.configurarComboDestino(tabId);
 	//	this.configurarToolbar(tabId);		
+		var me=this;
+		$(this.tabId+' .frmEditInlinePedido .btnCancel').click(function(){			
+			$(me.tabId+' .frmEditInlinePedido').css('visibility','hidden');				
+		});				
+		
+		$(this.tabId+' .frmEditInlinePedido .btnGuardar').click(function(){			
+			//$(me.tabId+' .frmEditInlinePedido').css('visibility','hidden');				
+			me.guardar();
+		});			
 	};
 	
+	this.guardar=function(){
+		alert("Guardar");
+	},
 	this.configurarGrid=function(tabId){
 		var fields=[
 			{ name: "id"  },
@@ -82,8 +94,8 @@ var EdicionArticulo=function (tabId){
 		gridPedidos.wijgrid({ loaded: function (e) { 
 			$(tabId+' .grid_articulos tr').bind('dblclick', function (e) { 																											
 				var position = $(e.currentTarget).position();				
-				$('.frmEditInlinePedido').css('visibility','visible');				
-				$('.frmEditInlinePedido').css('top',position.top+'px');
+				$(me.tabId+' .frmEditInlinePedido').css('visibility','visible');				
+				$(me.tabId+' .frmEditInlinePedido').css('top',position.top+'px');
 			//	$('.frmEditInlinePedido').css('left',position.left+'px');				
 				me.editar();
 			});			

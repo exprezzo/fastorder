@@ -190,7 +190,7 @@ class User extends Controlador{
 				$user = $userMod->findByEmail($_GET['email']);
 
 				$sql='UPDATE system_users SET
-				pass=AES_ENCRYPT("'.$_POST['new_password'].'", "m3me1234z") WHERE id = '.$user['id'];
+				pass=AES_ENCRYPT("'.$_POST['new_password'].'", '.PASS_AES.') WHERE id = '.$user['id'];
 
 				$con = $userMod->getConexion();
 				$sth = $con->prepare($sql);

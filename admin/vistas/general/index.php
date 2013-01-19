@@ -77,7 +77,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 			});
 			
 			
-			$("#splitter").wijsplitter({ orientation: "horizontal" });
+			//$("#splitter").wijsplitter({ orientation: "horizontal" });
 			
 			 $(".accesos_directos").wijcarousel({
                 display: 12,
