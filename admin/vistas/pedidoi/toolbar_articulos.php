@@ -23,7 +23,6 @@
 					<div class="btnEliminar"></div>
 					<span>Eliminar</span>
 				</button>
-				
 			 </li>			 
 		</ul>
 	</div>

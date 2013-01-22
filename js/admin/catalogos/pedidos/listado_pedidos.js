@@ -35,8 +35,7 @@
 						}
 					break;
 					case 'refresh':
-						var fi=$('#tabs '+tabId+' .txtFechaI').val();
-						alert(fi);
+						
 						var gridPedidos=$(me.tabId+" #lista_pedidos_internos");
 						gridPedidos.wijgrid('ensureControl', true);
 					break;
@@ -89,7 +88,7 @@
 				 { name: "id"},
 				 { name: "fecha"},
 				 { name: "nombreAlmacen"}
-			])							
+			])
 		});
 		dataSource.reader.read= function (datasource) {
 			

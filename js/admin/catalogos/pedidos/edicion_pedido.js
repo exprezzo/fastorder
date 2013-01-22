@@ -38,6 +38,7 @@ var EdicionPedido = function(){
 		var me=this;
 		var pedido={
 			id		: tab.find('.txtId').val(),
+			IdTmp		: tab.find('.txtIdTmp').val(),
 			almacen	: tab.find('.txtFkAlmacen').val(),
 			fecha	: tab.find('.txtFecha').val()
 		};
@@ -128,6 +129,7 @@ var EdicionPedido = function(){
 			data: datasource,
 			showTrigger: true,
 			minLength: 1,
+			autoFilter: false,
 			animationOptions: {
 				animated: "Drop",
 				duration: 1000
@@ -155,32 +157,36 @@ var EdicionPedido = function(){
 	this.configurarToolbar=function(tabId){		
 			
 			var me=this;
-			$(tabId+ "> .tbPedido").wijribbon({
-				click: function (e, cmd) {
-					switch(cmd.commandName){
-						case 'nuevo':
-							TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
-						break;
-						case 'guardar':
-							me.guardar();
-						break;
-						case 'eliminar':
-							me.nuevo();
-						break;
+			
+			$(this.tabId + ' .toolbarFormPedido .btnGuardar').click( function(){
+				alert("btnGuardar");
+			} );
+			// $(tabId+ "> .tbPedido").wijribbon({
+				// click: function (e, cmd) {
+					// switch(cmd.commandName){
+						// case 'nuevo':
+							// TabManager.add('/admin/pedidoi/nuevo','Nuevo Pedido');				
+						// break;
+						// case 'guardar':
+							// me.guardar();
+						// break;
+						// case 'eliminar':
+							// me.nuevo();
+						// break;
 						
-						default:						
-							$.gritter.add({
-								position: 'bottom-left',
-								title:"Informaci&oacute;n",
-								text: "Acciones del toolbar en construcci&oacute;n",
-								image: '/images/info.png',
-								class_name: 'my-sticky-class'
-							});
-						break;
-					}
+						// default:						
+							// $.gritter.add({
+								// position: 'bottom-left',
+								// title:"Informaci&oacute;n",
+								// text: "Acciones del toolbar en construcci&oacute;n",
+								// image: '/images/info.png',
+								// class_name: 'my-sticky-class'
+							// });
+						// break;
+					// }
 					
-				}
-			});
+				// }
+			// });
 			
 			
 			

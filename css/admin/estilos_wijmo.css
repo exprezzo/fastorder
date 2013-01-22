@@ -1,23 +1,12 @@
-
-.nombre_empresa_header{
-	cursor:pointer;
-}
-.wijmo-wijsplitter-h-expander{
-	top:11px !important;
-	left:20px;
-	position:absolute;
-	-visibility:hidden;
-}
- .wijmo-wijsplitter-h-panel1-expanded{
-	left:10px;
- }
-.wijmo-wijsplitter-h-panel1-collapsed{
-	top:6px !important;
-}
+.nombre_empresa_header{cursor:pointer;}
+.wijmo-wijsplitter-h-expander{top:11px !important;left:20px;position:absolute;-visibility:hidden;}
+ .wijmo-wijsplitter-h-panel1-expanded{left:10px;}
+.wijmo-wijsplitter-h-panel1-collapsed{top:6px !important;}
 .frmPedido{ position:relative; }
 .frmPedido .pnlEdicionArticulo{ position:absolute; visibility:hidden; }
 .frmPedido .frmEditInlinePedido{ visibility:hidden; }
-.frmPedido .pnlArticulos{  }
+.frmPedido .frmEditInlinePedido form{  }
+.frmPedido .pnlArticulos{ width:100%; }
 .frmPedido .cardArticulos{position:relative;}
 
 #menu_principal label{opacity:0;text-align:center; }

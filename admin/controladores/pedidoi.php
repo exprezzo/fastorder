@@ -4,6 +4,16 @@ require_once '../admin/modelos/almacen_model.php';
 require_once '../admin/modelos/articulo_model.php';
 require_once '../admin/modelos/um_model.php';
 class Pedidoi extends Controlador{
+	function guardarArticulo(){
+		$articulo=$_REQUEST['datos'];
+		
+		$mod=$this->getModel();
+		$mod->indexTabla=1;
+		$res = $mod->guardarArticulo($articulo);
+		
+		
+		echo json_encode($res);
+	}
 	function getModel(){		
 		if ( !isset($this->modObj) ){						
 			$this->modObj = new PedidoModel();	
@@ -17,66 +27,43 @@ class Pedidoi extends Controlador{
 		$pedido=$this->getPedido($idPedido);		
 	}
 	function getListaArticulos(){
-		$datos=array();
-		$datos[]=array(
-			'id'=>1,
-			'nombre'=>'Papas1',
-			'fk_articulo'=>1,
-			'cantidad'=>11,
-			'um'=>'Kg',
-			'fk_um'=>21		
-		);
+		$mod=$this->getModel();
+		$id=intval( $_REQUEST['id'] );
 		
-		$datos[]=array(
-			'id'=>2,
-			'nombre'=>'Papas2',
-			'fk_articulo'=>2,
-			'cantidad'=>3,
-			'um'=>'Kg',
-			'fk_um'=>21		
-		);
-		$datos[]=array(
-			'id'=>3,
-			'nombre'=>'Papas3',
-			'fk_articulo'=>3,
-			'cantidad'=>2,
-			'um'=>'Kg',
-			'fk_um'=>21		
-		);
-		$datos[]=array(
-			'id'=>4,
-			'nombre'=>'Papas4',
-			'fk_articulo'=>4,
-			'cantidad'=>81,
-			'um'=>'Kg',
-			'fk_um'=>21		
-		);
-		$datos[]=array(
-			'id'=>5,
-			'nombre'=>'Papas5',
-			'fk_articulo'=>5,
-			'cantidad'=>24,
-			'um'=>'Kg',
-			'fk_um'=>21		
-		);
+		$params=array();
+		$params['fk_pedido']=$id;
+		$params['start']=1;
+		$params['limit']=900;
+		$mod->indexTabla=1;
+		$res=$mod->getArticulos($params);
+		echo json_encode( $res );
 		
-		$res=array(
-			'datos'=>$datos,
-			'total'=>1
-		);
-		$respuesta=array(	
-			'rows'=>$res['datos'],
-			'totalRows'=> $res['total']
-		);
-		echo json_encode($respuesta);	
-	}
-	
+		
+		// $datos[]=array(
+			// 'id'=>5,
+			// 'nombre'=>'Papas5',
+			// 'fk_articulo'=>5,
+			// 'cantidad'=>24,
+			// 'um'=>'Kg',
+			// 'fk_um'=>21		
+		// );
+		
+		// $res=array(
+			// 'datos'=>$datos,
+			// 'total'=>1
+		// );
+		// $respuesta=array(	
+			// 'rows'=>$res['datos'],
+			// 'totalRows'=> $res['total']
+		// );
+		// echo json_encode($respuesta);	
+	}	
 	function getArticulos(){
 		$mod=new ArticuloModel();		
 		// $paging=$_GET['paging'];
 		// $start=intval($paging['pageIndex'])*9;		
 		$start=0;		
-		$res=$mod->paginar($start,9);				
+		$res=$mod->paginar($start,90);				
 		
 		$respuesta=array(	
 			'rows'=>$res['datos'],
@@ -89,7 +76,7 @@ class Pedidoi extends Controlador{
 		// $paging=$_GET['paging'];
 		// $start=intval($paging['pageIndex'])*9;		
 		$start=0;		
-		$res=$mod->paginar($start,9);				
+		$res=$mod->paginar($start,90);				
 		
 		$respuesta=array(	
 			'rows'=>$res['datos'],
@@ -97,13 +84,21 @@ class Pedidoi extends Controlador{
 		);
 		echo json_encode($respuesta);	
 	}
-	function nuevoPedido(){
-		return $this->nuevo();
+	function nuevo(){
+		 $mod=$this->getModel();
+		 $mod->indexTabla=1;
+		 $pedido=$mod->nuevo();
+		 //$pedido['datos']['id'] = $pedido['datos']['IdTmp'];
+		 //print_r($pedido);
+		 $vista=$this->getVista();
+		 $vista->pedido =$pedido['datos'];
+		 $vista->mostrar('pedidoi/nuevo');
 	}
 	// function nuevo(){
 		// $vista=$this->getVista();
 		// $vista->mostrar('pedidoi/pedidoi');
 	// }
+	
 	function getPedido($id = null){
 		if ($id==null){
 			$idPedido=$_REQUEST['pedidoId'];
@@ -114,12 +109,12 @@ class Pedidoi extends Controlador{
 		}
 		$mod=$this->getModel();
 		
-		$pedido = $mod->getPedido( $idPedido );
+		$pedido = $mod->editar( $idPedido );
 		
 		$vista=$this->getVista();
 		$vista->pedido=$pedido;
-		if ($mostrar==true){			
-			$vista->mostrar('pedidoi/pedidoi');
+		if ($mostrar==true){
+			$vista->mostrar('pedidoi/nuevo');
 		}else{
 			return $vista;
 		}
@@ -127,7 +122,7 @@ class Pedidoi extends Controlador{
 	
 	function verPedidos(){
 		$mod=$this->getModel();
-		$res=$mod->paginar();
+		$res=$mod->paginar(array());
 		
 		$vista=$this->getVista();
 		$vista->pedidos=$res['datos'];
@@ -144,11 +139,20 @@ class Pedidoi extends Controlador{
 	
 	function paginar(){
 		$mod=$this->getModel();
-		$paging=$_GET['paging'];
-		$pageSize=intval($paging['pageSize']);
-		$start=intval($paging['pageIndex'])*$pageSize;
 		
-		$res=$mod->paginar($start,$pageSize);				
+		$fechai=DateTime::createFromFormat ( 'd/m/Y' ,$_GET['fechai']);
+		$fechaf=DateTime::createFromFormat ( 'd/m/Y' ,$_GET['fechaf']);
+		//print_r($fechai);
+		
+		$paging=$_GET['paging']; //Datos de paginacion enviados por el componente js
+		$params=array(	//Se traducen al lenguaje sql
+			'pageSize'=>$pageSize=intval($paging['pageSize']),
+			'start'=>intval($paging['pageIndex'])*$pageSize,
+			'fechai'=>$fechai->format('Y-m-d').' 00:00:00',
+			'fechaf'=>$fechaf->format('Y-m-d').' 23:59:59'
+		);
+		
+		$res=$mod->paginar($params);				
 				
 		$respuesta=array(	
 			'rows'=>$res['datos'],			

@@ -121,7 +121,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 				-webkit-transition:height .5s; /* Safari and Chrome */
 				-o-transition:height .5s; /* Opera */					
 		}
-		#tabs > ul{display:none;}
+		#tabs > ul{display:visible;}
 	</style>
 	
 </head>

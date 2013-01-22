@@ -9,6 +9,7 @@
 <div class="frmEditInlinePedido" style="">
 
 	<form>
+		<input type="hidden" class="txtId" />
 		<select class="cmbArticulo" placeholder="Articulo">
 			<option value="1">a</option>
 			<option value="2">b</option>
@@ -22,10 +23,13 @@
 			<option>C</option>
 			<option>D</option>
 		</select>
+		<input type="hidden" class="txtFkArticulo" />
+		<input type="hidden" class="txtFkUm" />
+		
 	</form>
 	<div class="toolbarFormPedidoInline">
 
-		<div style="text-align:center;" class="boton btnNew">
+		<div style="text-align:center;" class="boton btnGuardar">
 			<div class="iconWrap">		
 				<div class="icon"></div>
 			</div>
@@ -48,6 +52,7 @@
 			<div class="wrapText">
 				<span>Borrar</span>
 			</div>		
-		</div>			
+		</div>	
+							
 	</div>
 </div>

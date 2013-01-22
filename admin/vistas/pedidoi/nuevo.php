@@ -26,15 +26,18 @@
 	
 	div.frmPedido .paneles{padding:8px;}
 	div.frmPedido .pnlIzq{display: inline-block !important;} 
+	div.frmPedido .pnlIzq .frmPedidoi{display: inline-block !important;} 
+	div.frmPedido .pnlIzq .toolbarFormPedido{display: inline-block !important;}  
 	div.frmPedido .pnlDer{display: inline-block !important; margin-top: 3px; vertical-align: top;} 
 		
 	.frmEditInlinePedido{position:absolute;z-index:10;transition: all 1s;-visibility:hidden;margin-left:-8px; -webkit-transition: all .5s;}
 	.frmEditInlinePedido .cmbArticulo{width:226px;}	
 	.frmEditInlinePedido .txtCantidad{width:235px;}	
 	.frmEditInlinePedido .cmbUm{width:186px;}
-	.frmEditInlinePedido form {background:white; width:682px; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888;}
-	.toolbarFormPedidoInline {display: inline-block; margin-top:-1px; margin-left:78px; }
-	.toolbarFormPedidoInline .boton{border-radius:9px;	border:#e3e2d9 1px solid;display: inline-block; padding: 5px 3px 5px 3px; cursor:pointer; background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888; }
+	.frmEditInlinePedido form {background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888;}
+	.toolbarFormPedidoInline {display: inline-block; margin-top:-1px;  }
+	.toolbarFormPedidoInline .boton{border-radius:9px;	margin-left:78px; border:#e3e2d9 1px solid;display: inline-block; padding: 5px 3px 5px 3px; cursor:pointer; background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888; }
+	.toolbarFormPedidoInline .boton:first-child{margin-left:300px;}
 	.toolbarFormPedidoInline span{margin-left:3px; margin-top: 5px;display: inline-block;border-radius: 6px;	padding: 0px 6px 0px 6px;border: #e3e2d9 1px solid;font-family:arial; color:white; font-size: 12px; font-family: cursive; }	
 	.toolbarFormPedidoInline .iconWrap{float:left; }
 	
@@ -59,10 +62,13 @@
 </div-->
 
 <?php
-	$fecha= isset($this->pedido)? $this->pedido['fecha'] : '';
-	$nombreAlmacen= isset($this->pedido)? $this->pedido['nombreAlmacen'] : '';
-	$fk_almacen= isset($this->pedido)? $this->pedido['fk_almacen'] : '';
-	$id= isset($this->pedido)? $this->pedido['id'] : 0;
+	if (isset($this->pedido)){
+		$fecha= $this->pedido['fecha'];
+		$nombreAlmacen= $this->pedido['nombreAlmacen'];
+		$fk_almacen= isset($this->pedido)? $this->pedido['fk_almacen'] : '';
+		$id= isset($this->pedido)? $this->pedido['id'] : 0;
+		$idTmp= empty($this->pedido['IdTmp'])?0 : $this->pedido['IdTmp'];
+	}	
 ?>
 
 
@@ -75,6 +81,7 @@
 	<div class="pnlIzq">
 		<form class='frmPedidoi' style='padding-top:10px;'>	
 			<input type='hidden' name='id' class="txtId" value="<?php echo $id; ?>" />	
+			<input type='hidden' name='IdTmp' class="txtIdTmp" value="<?php echo $idTmp; ?>" />	
 			<input type='hidden' name='fecha' class="txtFkAlmacen" value="<?php echo $fk_almacen; ?>" />
 			<div style='display:inline-block;'>
 				<div class="inputBox" style='margin-bottom:5px;'>
@@ -97,33 +104,15 @@
 			</div>
 			<br />	
 		</form>
-		<div class="cardArticulos">
-			<div style='display:inline-block;' class="pnlArticulos ui-widget-content">								
-				<table class="grid_articulos" style="width:650px;">
-					<thead>
-						<th>Producto</th> 
-						<th>Cantidad</th>
-					</thead>
-				  <tbody>
-					<tr><td></td> <td></td></tr>
-					<?php 
-						if ( isset($this->pedido) )
-						foreach($this->pedido['articulos'] as $articulo){			
-						//	echo '<tr><td>'.$articulo['nombreProducto'].'</td> <td>'.$articulo['cantidad'].'</td></tr>';
-						}
-					?>
-					
-				  </tbody>
-				</table>
+		<div class="toolbarFormPedido">		
+			<div style="text-align:center;" class="boton btnGuardar">
+				<div class="iconWrap">		
+					<div class="icon"></div>
+				</div>
+				<div>
+					<span>Guardar</span>
+				</div>		
 			</div>
-			
-			<?php $this->mostrar('pedidoi/edicion_articulo'); ?>
-			
-		</div>
-	</div>
-	<div class="pnlDer" >
-		<div class="toolbarFormPedido">
-		
 			<div style="text-align:center;" class="boton btnNew">
 				<div class="iconWrap">		
 					<div class="icon"></div>
@@ -131,15 +120,7 @@
 				<div>
 					<span>Nuevo</span>
 				</div>		
-			</div>
-			<div style="text-align:center;" class="boton btnEdit">
-				<div class="iconWrap">		
-					<div class="icon"></div>
-				</div>
-				<div>
-					<span>Editar</span>
-				</div>		
-			</div>
+			</div>			
 			<div style="text-align:center;" class="boton btnEmail">
 				<div class="iconWrap">		
 					<div class="icon"></div>
@@ -164,6 +145,40 @@
 					<span>Borrar</span>
 				</div>		
 			</div>			
+			<div style="text-align:center;" class="boton btnAgregar">
+				<div class="iconWrap">		
+					<div class="icon"></div>
+				</div>
+				<div>
+					<span>Agregar</span>
+				</div>		
+			</div>			
 		</div>
+	</div>
+	<div class="cardArticulos">
+			<div style='display:inline-block;' class="pnlArticulos ui-widget-content">								
+				<table class="grid_articulos" style="width:98%;">
+					<thead>
+						<th>Producto</th> 
+						<th>Cantidad</th>
+					</thead>
+				  <tbody>
+					<tr><td></td> <td></td></tr>
+					<?php 
+						if ( isset($this->pedido) )
+						foreach($this->pedido['articulos'] as $articulo){			
+						//	echo '<tr><td>'.$articulo['nombreProducto'].'</td> <td>'.$articulo['cantidad'].'</td></tr>';
+						}
+					?>
+					
+				  </tbody>
+				</table>
+			</div>
+			
+			<?php $this->mostrar('pedidoi/edicion_articulo'); ?>
+			
+		</div>
+	<div class="pnlDer" >
+		
 	</div>
 </div>
