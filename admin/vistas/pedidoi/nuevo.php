@@ -58,10 +58,11 @@
 	.frmPedidoi input.txtFecha {height: 26px !important;text-align: right !important;}
 	#tabs > ul{display:block;}
 	div.frmPedido{
-		padding: 0px;
-		margin-top: 0;
+		margin-top: 20px !important;
+		/*padding: 0px;
+		
 		width: 100% !important;
-		left: 0;
+		left: 0;*/
 	}
 </style>
 <script src="/js/admin/catalogos/pedidos/edicion_pedido.js"></script>
@@ -129,10 +130,10 @@
 ?>
 
 
-<!--div class="formTitle ui-widget-header ">
+<div class="formTitle ui-widget-header ">
 	<span class="">PEDIDO</span>
 	<span class="closeBtn ui-icon ui-icon-close"></span>
-</div-->
+</div>
 
 <div class="paneles">
 	<div class="pnlIzq">
@@ -151,14 +152,7 @@
 					</select>
 				</div>		
 			</div>
-			<div style='display:inline-block;'>
-				<div class="inputBox" style='margin-bottoms:5px;'>		
-					<label>Destino:</label>
-					<select class="cmbDestino" style='width:170px;'>			
-					</select>
-				</div>		
-				
-			</div>
+			
 			<br />	
 		</form>
 		<div class="toolbarFormPedido">		

@@ -496,7 +496,7 @@ var EdicionArticulo=function (tabId){
 		var me=this;
 		$(this.tabId+ ' .btnAgregar').click(function(){		
 			
-			
+			$(me.tabId+' .frmEditInlinePedido').css('top','38px');
 			$(me.tabId+' .frmEditInlinePedido .txtId').val(0);
 			$(me.tabId+' .frmEditInlinePedido .txtCantidad').wijinputnumber('setText',0);
 			$(me.tabId+' .frmEditInlinePedido .txtFkArticulo').val(0);				
