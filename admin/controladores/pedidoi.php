@@ -4,6 +4,24 @@ require_once '../admin/modelos/almacen_model.php';
 require_once '../admin/modelos/articulo_model.php';
 require_once '../admin/modelos/um_model.php';
 class Pedidoi extends Controlador{
+	function eliminar(){
+		$modObj= $this->getModel();
+		$params=array();
+		
+		if ( !isset($_POST['id']) ){
+			$id=$_POST['datos'];
+		}else{
+			$id=$_POST['id'];
+		}
+		$params['id']=$id;
+		
+		$res=$modObj->borrar($params);
+		
+		
+		echo json_encode($res);
+		exit;
+		//return $respuesta;
+	}
 	function guardarArticulo(){
 		$articulo=$_REQUEST['datos'];
 		
@@ -29,11 +47,14 @@ class Pedidoi extends Controlador{
 	function getListaArticulos(){
 		$mod=$this->getModel();
 		$id=intval( $_REQUEST['id'] );
-		
-		$params=array();
+		$paging=$_REQUEST['paging'];
+		$params=array(	//Se traducen al lenguaje sql
+			'limit'=>$pageSize=intval($paging['pageSize']),
+			'start'=>intval($paging['pageIndex'])*$pageSize
+		);
 		$params['fk_pedido']=$id;
-		$params['start']=1;
-		$params['limit']=900;
+		// $params['start']=1;
+		// $params['limit']=900;
 		$mod->indexTabla=1;
 		$res=$mod->getArticulos($params);
 		echo json_encode( $res );
@@ -193,7 +214,13 @@ class Pedidoi extends Controlador{
 			);
 			echo json_encode($res); exit;
 		}
+		
 		$model=$this->getModel();
+		$model->indexTabla=1;
+		
+		$fecha = DateTime::createFromFormat('d/m/Y', $pedido['fecha']);
+		$pedido['fecha']= $fecha->format('Y-m-d H:i:s');
+		
 		$res = $model->guardar($pedido);
 		echo json_encode($res);
 	}

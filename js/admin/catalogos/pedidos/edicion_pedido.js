@@ -79,6 +79,38 @@ var EdicionPedido = function(){
 			});
 		});
 	};	
+	this.eliminar=function(){
+		var id = this.selected.id;
+		var me=this;
+		$.ajax({
+				type: "POST",
+				url: '/admin/vuelos/eliminar',
+				data: { id: id}
+			}).done(function( response ) {		
+				var resp = eval('(' + response + ')');
+				var msg= (resp.msg)? resp.msg : '';
+				var title;
+				if ( resp.success == true	){
+					icon='/images/yes.png';
+					title= 'Success';				
+					var gridPedidos=$(me.tabId+" #lista_de_vuelos");				
+					gridPedidos.wijgrid('ensureControl', true);
+				}else{
+					icon= '/images/error.png';
+					title= 'Error';
+				}
+				
+				//cuando es true, envia tambien los datos guardados.
+				//actualiza los valores del formulario.
+				$.gritter.add({
+					position: 'bottom-left',
+					title:title,
+					text: msg,
+					image: icon,
+					class_name: 'my-sticky-class'
+				});
+			});
+	},
 	this.configurarFormulario=function(tabId){
 		$('#tabs '+tabId+' .txtFecha').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true});		
 		
@@ -159,8 +191,17 @@ var EdicionPedido = function(){
 			var me=this;
 			
 			$(this.tabId + ' .toolbarFormPedido .btnGuardar').click( function(){
-				alert("btnGuardar");
+				me.guardar();
 			} );
+			
+			$(this.tabId + ' .toolbarFormPedido .btnEliminar').click( function(){
+				var r=confirm("¿Eliminar el elemento?");
+				if (r==true){
+				  me.eliminar();
+				}
+			} );
+			
+			
 			// $(tabId+ "> .tbPedido").wijribbon({
 				// click: function (e, cmd) {
 					// switch(cmd.commandName){

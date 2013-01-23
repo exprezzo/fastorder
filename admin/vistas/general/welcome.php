@@ -18,7 +18,7 @@
 	});
 	
 </script>
-<div style="margin-top:-25px;">
+<div style="margin-top:-29px;">
 <h1>Bienvenido!</h1>
 <br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>

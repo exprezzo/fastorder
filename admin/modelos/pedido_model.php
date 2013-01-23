@@ -1,7 +1,7 @@
 <?php
 include '../'.$_PETICION->modulo.'/modelos/pedido_producto_model.php';
 class PedidoModel extends Modelo_PDO{
-	//var $tabla='pedidos';
+	var $tabla='pedidos';
 	var $tablas=array('tmp_pedidos','pedidos');
 	var $ids=array('IdTmp','id');
 	var $indexTabla=0;
@@ -30,7 +30,11 @@ class PedidoModel extends Modelo_PDO{
 		$params=array();
 		$params['id']=0;
 		$params['almacen']=1;
-		$params['fecha']='01/01/2012';				
+		$params['fecha']=date('Y-m-d H:i:s');				
+		
+		//$fecha = DateTime::createFromFormat('d/m/Y', $strFecha);
+		//$strFecha= $fecha->format('Y-m-d H:i:s');
+		
 		return $this->guardar( $params );				
 	}
 	function getArticulos($params){
@@ -107,8 +111,9 @@ class PedidoModel extends Modelo_PDO{
 		$id			=$params['id'];
 		$fk_almacen	=$params['almacen'];
 		$strFecha	=$params['fecha'];
-		$fecha = DateTime::createFromFormat('d/m/Y', $strFecha);
-		$strFecha= $fecha->format('Y-m-d H:i:s');
+	//	echo $strFecha; exit;
+		//$fecha = DateTime::createFromFormat('d/m/Y', $strFecha);
+		//$strFecha= $fecha->format('Y-m-d H:i:s');
 		if ( empty($id) ){
 			//           CREAR
 			$sql='INSERT INTO '.$this->tablas[$this->indexTabla].' SET fk_almacen=:fk_almacen , fecha= :fecha';

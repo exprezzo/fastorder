@@ -56,7 +56,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 			iniciarLinkTabs(); //A los objetos con atributo linkTab=true,  se les agrega comportamiento ajax para abrir tabs.
 			
 			//TabManager.add('/welcome');
-			TabManager.add('/admin/general/welcome');
+			//TabManager.add('/admin/general/welcome');
 
 			$(window).resize(function() {
 			  ajustarTab();
@@ -121,7 +121,7 @@ if ( !isset($_SESSION['isLoged'])|| $_SESSION['isLoged']!=true ){
 				-webkit-transition:height .5s; /* Safari and Chrome */
 				-o-transition:height .5s; /* Opera */					
 		}
-		#tabs > ul{display:visible;}
+		
 	</style>
 	
 </head>

@@ -5,6 +5,7 @@
 	});	
 </script>
 <style type="text/css">	
+	
 </style>
 
 <?php $tabId=$_REQUEST['tabId']; ?>
@@ -34,13 +35,13 @@
 				</button>				
 			 </li>
 			 <li>				
-				<span class="tbFecha">					
-					<span class="ui-button-text">Fecha Inicial</span><br/>
+				<span class="tbFecha">										
 					<input type='text' name='fecha' class="txtFechaI"  />
+					<span class="ui-button-text">Fecha Inicial</span><br/>
 				</span>
-				<span class="tbFecha">					
-					<span class="ui-button-text">Fecha Final</span><br/>
+				<span class="tbFecha">										
 					<input type='text' name='fecha' class="txtFechaF"  />
+					<span class="ui-button-text">Fecha Final</span><br/>
 				</span>
 			</li>
 			<li>			

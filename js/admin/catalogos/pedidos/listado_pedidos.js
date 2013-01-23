@@ -55,8 +55,9 @@
 				
 			}
 		});
-		$('#tabs '+tabId+' .txtFechaI').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true});	
-		$('#tabs '+tabId+' .txtFechaF').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true});	
+		var fecha=new Date();
+		$('#tabs '+tabId+' .txtFechaI').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true, date: new Date()});	
+		$('#tabs '+tabId+' .txtFechaF').wijinputdate({ dateFormat: 'd/M/yyyy', showTrigger: true, date: new Date()}); //fecha.getFullYear()	+'-'+fecha.getMonth()+1+'-'+fecha.getUTCDate() });	
 	};
 	this.configurarGrid=function(tabId){
 		var pageSize=10;

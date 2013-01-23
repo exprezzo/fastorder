@@ -132,7 +132,7 @@ class Modelo_PDO implements ICrud{
 		
 	function borrar( $params ){
 		if ( empty($params['id']) ){
-			throw new Exeption("Es necesario el parámetro 'id'");
+			throw new Exeption("Es necesario el parÃ¡metro 'id'");
 		};		
 		$id=$params['id'];
 		$sql = 'DELETE FROM '.$this->tabla.' WHERE id=:id';		
@@ -142,7 +142,19 @@ class Modelo_PDO implements ICrud{
 		
 		$exito = $sth->execute();					
 		
-		return $exito;	
+		$msg="Eliminado";
+		$resp=array();
+		if (!$exito){
+			//Logger->logear   		PENDIENTE: LOGEAR
+			$resp['success']=false;
+			$error=$sth->errorInfo();
+			$msg    = $error[2];			
+		}else{
+			$resp['success']=true;
+		}
+		$resp['msg']=$msg;
+		//print_r($resp);
+		return $resp;
 	}
 	
 	function paginar($params){

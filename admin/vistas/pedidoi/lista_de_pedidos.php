@@ -3,6 +3,33 @@
 	.colFecha{
 		text-align:right;
 	}
+	.tbFecha input{
+		height: 30px;
+font-size: 17px;
+text-align: right;
+	}
+	
+	.tbFecha > div:first-child{
+		display:block;
+	}
+	
+	.tbFecha .ui-icon{
+		
+	/*
+		background-image: url('/images/office_calendar.png') !important;
+		width:52px !important;
+		height:19px !important;*/
+		background-position:-47px -95px !important; 
+		
+	}
+	
+	.tbFecha .wijmo-wijinput-trigger{
+		background: transparent;
+		border: 0;
+		
+	}
+	
+	
 </style>
 <script>			
 	$( function(){

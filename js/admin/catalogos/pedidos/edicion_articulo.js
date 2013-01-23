@@ -80,7 +80,7 @@ var EdicionArticulo=function (tabId){
 			// id		:$(this.tabId+' .frmPedidoi .txtId').val(),
 			// IdTmp	:$(this.tabId+' .frmPedidoi .txtIdTmp').val()
 		// };
-		console.log("this.tabId"); console.log(this.tabId);
+		
 		// datasource.proxy.options.data={
 			// id		:5,
 			// IdTmp	:6
@@ -107,9 +107,7 @@ var EdicionArticulo=function (tabId){
 			search: function (e, obj) {
 				//obj.datasrc.proxy.options.data.name_startsWith = obj.term.value;
 			},
-			select: function (e, item) {
-			//	console.log("item selected"); console.log(item);
-			console.log("item"); console.log(item);
+			select: function (e, item) {			
 				$('#tabs '+tabId+' .txtFkArticulo').val(item.value);
 			}
 		});
@@ -187,16 +185,16 @@ var EdicionArticulo=function (tabId){
 				url: "/admin/pedidoi/getListaArticulos",
 				dataType: "json"				
 			}),
+			
 			dynamic:true,			
 			reader:new wijarrayreader(fields),
 			loading: function(e, data) { 
 				var id=$(me.tabId+' .frmPedidoi .txtId').val();					
 				var IdTmp=$(me.tabId+' .frmPedidoi .txtIdTmp').val();					
 			
-                me.dataSource.proxy.options.data={id:id,IdTmp:IdTmp};
+                me.dataSource.proxy.options.data.id=id;
+				me.dataSource.proxy.options.data.IdTmp=IdTmp;
 				
-				console.log(e);
-				console.log(data);
 			}
 		});
 		me.dataSource=dataSource;
@@ -216,11 +214,10 @@ var EdicionArticulo=function (tabId){
 		gridPedidos.wijgrid({
 			dynamic: true,
 			allowColSizing:true,
-			
-			//allowEditing:false,
-			allowKeyboardNavigation:true,
 			allowPaging: true,
-			pageSize:6,
+			pageSize:5,
+			//allowEditing:false,
+			allowKeyboardNavigation:true,			
 			selectionMode:'singleRow',
 			data:dataSource,
 			beforeCellEdit: this.beforeCellEdit, 
@@ -237,8 +234,7 @@ var EdicionArticulo=function (tabId){
 					args.$rows.attr('pedidoId',args.data.id);
 			},
 			cellStyleFormatter: function(args) { 
-			 if (args.column._originalDataKey=='fecha'){
-				// console.log(args);		
+			 if (args.column._originalDataKey=='fecha'){				
 				 args.$cell.addClass("colFecha");				
 			 }
 			
@@ -426,18 +422,16 @@ var EdicionArticulo=function (tabId){
 		//Posicionar tab Edicion articulo
 		this.mostrarTab(0);
 	};
-	this.editar=function(){
-		console.log("this.selected");
-		console.log(this.selected);
+	this.editar=function(){		
 		//Cargar los datos en el editor
 		
 		if (this.selected !=undefined){
 			
 			$(this.tabId+' .frmEditInlinePedido .txtId').val(this.selected.id);
 			$(this.tabId+' .frmEditInlinePedido .txtCantidad').val(this.selected.cantidad);
+			$(this.tabId+' .frmEditInlinePedido .txtCantidad').wijinputnumber('setText',this.selected.cantidad);
 			$(this.tabId+' .frmEditInlinePedido .txtFkArticulo').val(this.selected.fk_articulo);				
-			$(this.tabId+' .frmEditInlinePedido .cmbArticulo').wijcombobox("option", "text", this.selected.nombre);
-			
+			$(this.tabId+' .frmEditInlinePedido .cmbArticulo').wijcombobox("option", "text", this.selected.nombre);			
 			$(this.tabId+' .frmEditInlinePedido .txtFkUm').val(this.selected.fk_um);
 			$(this.tabId+' .frmEditInlinePedido .cmbUm').wijcombobox("option", "text", this.selected.um); //
 		}
@@ -501,7 +495,15 @@ var EdicionArticulo=function (tabId){
 	this.configurarToolbar=function(tabId){
 		var me=this;
 		$(this.tabId+ ' .btnAgregar').click(function(){		
-			$(me.tabId+ ' .frmEditInlinePedido .txtId').val(0);
+			
+			
+			$(me.tabId+' .frmEditInlinePedido .txtId').val(0);
+			$(me.tabId+' .frmEditInlinePedido .txtCantidad').wijinputnumber('setText',0);
+			$(me.tabId+' .frmEditInlinePedido .txtFkArticulo').val(0);				
+			$(me.tabId+' .frmEditInlinePedido .cmbArticulo').wijcombobox("option", "text", '');			
+			$(me.tabId+' .frmEditInlinePedido .txtFkUm').val(0);
+			$(me.tabId+' .frmEditInlinePedido .cmbUm').wijcombobox("option", "text", ''); //
+			
 			me.mostrarEditor();
 		});
 	}

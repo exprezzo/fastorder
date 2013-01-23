@@ -4,7 +4,7 @@
 		/* display:inline-block; */
 	}
 	
-	div.frmPedido{ width: auto !important; display: inline-block !important; padding:8px; border:#b7c7e1 1px solid !important; box-shadow: 10px 10px 5px #888888; margin-top:10px; left:100px;}
+	div.frmPedido{ width: auto !important; display: inline-block !important; padding:8px; border:#b7c7e1 1px solid !important; box-shadow: 10px 10px 5px #888888; margin-top:-7px !important; left:100px;}
 	div.frmPedido .formTitle{display:block; padding:0px 0 0 6px; cursor:move; }
 	div.frmPedido .formTitle .closeBtn{cursor:pointer; width:16px; height:16px; display:inline-block; }
 	
@@ -13,16 +13,24 @@
 	.iconWrap{	border: #9b9b9b 1px solid; display: inline-block; border-radius: 45px; padding: 2px; }
 	.iconWrap .icon{ width: 20px;height: 20px; background-color: rgb(228, 226, 226); background-repeat: no-repeat; background-position: 50%; border-radius: 45px; padding: 3px; }
 	.boton.btnNew .icon{ background: #8db817 url('/images/document_new.png') no-repeat scroll center;  }		
-	.boton.btnNew span{background: #8db817; }
+	.boton.btnNew span{background: #8db817; }	
+	.boton.btnGuardar .icon{ background: white url('/images/save.png') no-repeat scroll center; width:21px; background-size:18px;}		
+	.boton.btnGuardar .iconWrap{background:black;}
+	.boton.btnGuardar span{background: black;color:white; }
 	
 	.boton.btnEdit .icon{background: #dbc512 url('/images/document_edit.png') no-repeat scroll center;}
 	.boton.btnEdit span{background-color: #dbc512;}
 	.boton.btnEmail .icon{background: #4f77b5 url('/images/pre_mail.png') no-repeat scroll center;}
 	.boton.btnEmail span{background-color: #4f77b5;}
-	.boton.btnPrint .icon{background: #9d9c9c url('/images/printer.png') no-repeat scroll center;}
+	.boton.btnPrint .icon{background: #9d9c9c url('/images/printer.png') no-repeat scroll center; opacity:.5;}
 	.boton.btnPrint span{background-color: #9d9c9c;}
 	.boton.btnDelete .icon{background: #d74e46 url('/images/delete.png') no-repeat scroll center;}
 	.boton.btnDelete span{background-color: #d74e46;}
+	.boton.btnAgregar .icon{background: white url('/images/add.png') no-repeat scroll center; background-size:18px;}
+	.boton.btnAgregar .iconWrap{background:black;}
+	.boton.btnAgregar span{background: black;color:white; }
+	.boton.btnCancel .icon{background: #dbc512 url('/images/player_stop.png') no-repeat scroll center; background-size:16px;}
+	.boton.btnCancel span{background-color: #dbc512;}
 	
 	div.frmPedido .paneles{padding:8px;}
 	div.frmPedido .pnlIzq{display: inline-block !important;} 
@@ -36,13 +44,25 @@
 	.frmEditInlinePedido .cmbUm{width:186px;}
 	.frmEditInlinePedido form {background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888;}
 	.toolbarFormPedidoInline {display: inline-block; margin-top:-1px;  }
-	.toolbarFormPedidoInline .boton{border-radius:9px;	margin-left:78px; border:#e3e2d9 1px solid;display: inline-block; padding: 5px 3px 5px 3px; cursor:pointer; background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888; }
+	.toolbarFormPedidoInline .boton{border-radius:9px;	margin-left:78px; border:#e3e2d9 1px solid;display: inline-block; padding: 5px 3px 5px 3px; cursor:pointer;
+		background:white; border:black 1px solid;border-radius:10px; box-shadow: 10px 10px 5px #888888; opacity:.5; 
+		transition: opacity .3s;-moz-transition: opacity .3s;-webkit-transition: opacity .3s;-o-transition: opacity .3s;
+	}
+	.toolbarFormPedidoInline .boton:hover{opacity:1};
 	.toolbarFormPedidoInline .boton:first-child{margin-left:300px;}
 	.toolbarFormPedidoInline span{margin-left:3px; margin-top: 5px;display: inline-block;border-radius: 6px;	padding: 0px 6px 0px 6px;border: #e3e2d9 1px solid;font-family:arial; color:white; font-size: 12px; font-family: cursive; }	
 	.toolbarFormPedidoInline .iconWrap{float:left; }
 	
 	.toolbarFormPedidoInline .wrapText{display:inline; float:right; }	
 	.toolbarFormPedidoInline .btnEdit{margin-left: 116px;text-align: center;margin-right: 112px;}
+	.frmPedidoi input.txtFecha {height: 26px !important;text-align: right !important;}
+	#tabs > ul{display:block;}
+	div.frmPedido{
+		padding: 0px;
+		margin-top: 0;
+		width: 100% !important;
+		left: 0;
+	}
 </style>
 <script src="/js/admin/catalogos/pedidos/edicion_pedido.js"></script>
 <script>
@@ -52,6 +72,43 @@
 		var almacen="<?php echo isset($this->pedido)?  $this->pedido['nombreAlmacen'] : ''; ?>";
 		var edicion = new EdicionPedido();
 		edicion.init(tabId, pedidoId, almacen);
+					
+		$('#'+tabId+' .toolbarFormPedido .boton:not(.btnPrint, .btnEmail)').mouseenter(function(){
+			$(this).addClass("ui-state-hover");			
+		});
+		
+		$('#'+tabId+' .toolbarFormPedido .boton *').mouseenter(function(){			
+			// console.log('ENTER CHILD');
+			// console.log(this);
+			// var parent=$(this).parent();
+			// console.log('el parent');
+			// console.log(parent);
+			// $(this).parent('.boton').addClass("ui-state-hover");			
+			
+		});
+		
+		
+		$('#'+tabId+' .toolbarFormPedido .boton').mouseleave(function(e){
+			 // console.log("eventObject"); console.dir(e);
+			// console.log('this');
+			// console.log( $(this) );
+			// console.log(eventObject.relatedTarget.parentElement);
+			// if ( e.target !=this || e.relatedTarget.parentNode.className == e.currentTarget.className || e.relatedTarget.parentNode.className == e.currentTarget.className){
+				// return false;
+			// }else{
+				// console.log( 'eventObject.relatedTarget.parentNode.className'  );
+				// console.log( e.relatedTarget.parentNode.className  );
+				
+				// console.log('eventObject.currentTarget.className');
+				// console.log(e.currentTarget.className);
+				
+			// }
+			
+				$(this).removeClass("ui-state-hover");
+			
+			
+		});
+		
 	});
 </script>
 
@@ -72,10 +129,10 @@
 ?>
 
 
-<div class="formTitle ui-widget-header ">
+<!--div class="formTitle ui-widget-header ">
 	<span class="">PEDIDO</span>
 	<span class="closeBtn ui-icon ui-icon-close"></span>
-</div>
+</div-->
 
 <div class="paneles">
 	<div class="pnlIzq">
@@ -84,7 +141,7 @@
 			<input type='hidden' name='IdTmp' class="txtIdTmp" value="<?php echo $idTmp; ?>" />	
 			<input type='hidden' name='fecha' class="txtFkAlmacen" value="<?php echo $fk_almacen; ?>" />
 			<div style='display:inline-block;'>
-				<div class="inputBox" style='margin-bottom:5px;'>
+				<div class="inputBox" style='margin-bottom:8px;'>
 					<label >Fecha:</label>
 					<input type='text' name='fecha' class="txtFecha" value="<?php echo $fecha; ?>" autofocus />
 				</div>
@@ -105,7 +162,7 @@
 			<br />	
 		</form>
 		<div class="toolbarFormPedido">		
-			<div style="text-align:center;" class="boton btnGuardar">
+			<div style="text-align:center;" class="boton btnGuardar " >
 				<div class="iconWrap">		
 					<div class="icon"></div>
 				</div>

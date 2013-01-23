@@ -85,12 +85,12 @@ class PedidoProductoModel extends Modelo_PDO{
 		$sql = 'SELECT pedprod.*,prod.nombre as nombre,um.abrev as um FROM '.$this->tablas[$this->indexTabla].' pedprod
 		LEFT JOIN productos prod ON pedprod.fk_articulo = prod.id
 		LEFT JOIN um um ON um.id = pedprod.fk_um
-		WHERE pedprod.fk_pedido=:fk_pedido';		
+		WHERE pedprod.fk_pedido=:fk_pedido limit :start,:limit';		
 				
 		$con=$model->getConexion();
 		$sth=$con->prepare($sql);
-		// $sth->bindValue(':start',$start, PDO::PARAM_INT);
-		// $sth->bindValue(':limit',$pageSize, PDO::PARAM_INT);
+		 $sth->bindValue(':start',intval($start), PDO::PARAM_INT);
+		 $sth->bindValue(':limit',intval($pageSize), PDO::PARAM_INT);
 		$sth->bindValue(':fk_pedido',$fk_pedido, PDO::PARAM_INT);
 		$datos=$model->execute($sth);
 		
