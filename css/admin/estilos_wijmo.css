@@ -19,7 +19,8 @@ span.ui-button-text { padding-top:40px !important; background-repeat: no-repeat;
 .ui-tabs{padding:0;}
 ul.ui-tabs-nav li a{ background-size:32px; }
 ul.ui-tabs-nav li a { -padding-top: 14px !important; -padding-bottom: 14px !important; padding-left: 38px !important; background-repeat: no-repeat;background-position:5px;	}
-ul.ui-tabs-nav li a.listaPedidos{ background-image:url('/images/admin/aero/plane_tickets.png'); }
+ul.ui-tabs-nav li a.listaPedidos{ background-image:url('/images/supermono/paste.png'); }
+ul.ui-tabs-nav li a.frmPedido{ background-image:url('/images/supermono/add-button.png'); }
 ul.ui-tabs-nav li a.welcome{ background-image:url('/images/admin/home.png'); }
 
 

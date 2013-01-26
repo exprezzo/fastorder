@@ -2,7 +2,7 @@ var tab_counter = 1;
 var TabManager={
 	init:function(target){
 		$tabs = $(target).wijtabs({
-		   tabTemplate: '<li><a  href="#{href}">#{label}</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>'
+		   tabTemplate: '<li><a  href="#{href}">#{label}</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>'		   
 		});
 		this.tabs=$tabs;
 		// addTab button: opens the Add tab dialog box		
@@ -10,8 +10,7 @@ var TabManager={
 			var index = $('li', $tabs).index($(this).parent());
 			$tabs.wijtabs('remove', index);
 		});
-		
-		
+				
 		this.refresLayout();
 	},
 	refresLayout:function(){
@@ -29,13 +28,13 @@ var TabManager={
 		tab_counter++;
 		
 		$tabs.wijtabs('add','#'+ tabId, 'Nuevo Tab');	//Los agrego antes de la peticion ajax.
-		$('#'+ tabId ).attr('objId',objId);	
+		$('#'+ tabId ).attr('objId',objId);
 		
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: { tabId:tabId, pedidoId:id }
-		}).done(function( response ) {			
+		}).done(function( response ) {
 			$('#'+ tabId ).html(response);				
 			$tabs.wijtabs('select',tabId);			
 		});
@@ -57,8 +56,7 @@ var TabManager={
 							//Si el tab es el mismo no hacer nada
 							return true;
 						}
-						
-						
+												
 						jAnt.addClass('ui-tabs-hide');
 						jElement.attr('aria-hidden',true);
 						//Desmarcar el tab anterior

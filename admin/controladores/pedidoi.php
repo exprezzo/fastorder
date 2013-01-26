@@ -23,13 +23,9 @@ class Pedidoi extends Controlador{
 		//return $respuesta;
 	}
 	function guardarArticulo(){
-		$articulo=$_REQUEST['datos'];
-		
-		$mod=$this->getModel();
-		$mod->indexTabla=1;
-		$res = $mod->guardarArticulo($articulo);
-		
-		
+		$datos=$_REQUEST['datos'];				
+		$mod=new PedidoProductoTmpModel();		
+		$res = $mod->guardar($datos);		
 		echo json_encode($res);
 	}
 	function getModel(){		
@@ -45,39 +41,17 @@ class Pedidoi extends Controlador{
 		$pedido=$this->getPedido($idPedido);		
 	}
 	function getListaArticulos(){
-		$mod=$this->getModel();
-		$id=intval( $_REQUEST['id'] );
+		$mod=new PedidoProductoTmpModel();
+		$fk_tmp=$_REQUEST['fk_tmp'];
 		$paging=$_REQUEST['paging'];
 		$params=array(	//Se traducen al lenguaje sql
 			'limit'=>$pageSize=intval($paging['pageSize']),
 			'start'=>intval($paging['pageIndex'])*$pageSize
 		);
-		$params['fk_pedido']=$id;
-		// $params['start']=1;
-		// $params['limit']=900;
+		$params['fk_tmp']=$fk_tmp;		
 		$mod->indexTabla=1;
-		$res=$mod->getArticulos($params);
-		echo json_encode( $res );
-		
-		
-		// $datos[]=array(
-			// 'id'=>5,
-			// 'nombre'=>'Papas5',
-			// 'fk_articulo'=>5,
-			// 'cantidad'=>24,
-			// 'um'=>'Kg',
-			// 'fk_um'=>21		
-		// );
-		
-		// $res=array(
-			// 'datos'=>$datos,
-			// 'total'=>1
-		// );
-		// $respuesta=array(	
-			// 'rows'=>$res['datos'],
-			// 'totalRows'=> $res['total']
-		// );
-		// echo json_encode($respuesta);	
+		$res=$mod->paginar($params);
+		echo json_encode( $res );				
 	}	
 	function getArticulos(){
 		$mod=new ArticuloModel();		
@@ -109,16 +83,11 @@ class Pedidoi extends Controlador{
 		 $mod=$this->getModel();
 		 $mod->indexTabla=1;
 		 $pedido=$mod->nuevo();
-		 //$pedido['datos']['id'] = $pedido['datos']['IdTmp'];
-		 //print_r($pedido);
+		 
 		 $vista=$this->getVista();
 		 $vista->pedido =$pedido['datos'];
 		 $vista->mostrar('pedidoi/nuevo');
-	}
-	// function nuevo(){
-		// $vista=$this->getVista();
-		// $vista->mostrar('pedidoi/pedidoi');
-	// }
+	}	
 	
 	function getPedido($id = null){
 		if ($id==null){
@@ -215,14 +184,21 @@ class Pedidoi extends Controlador{
 			echo json_encode($res); exit;
 		}
 		
-		$model=$this->getModel();
-		$model->indexTabla=1;
-		
 		$fecha = DateTime::createFromFormat('d/m/Y', $pedido['fecha']);
 		$pedido['fecha']= $fecha->format('Y-m-d H:i:s');
 		
+		$model=$this->getModel();		
 		$res = $model->guardar($pedido);
+		$pk=$res['datos']['id'];
+		
+		$pedido=$model->editar($pk);
+		$res['datos']=$pedido;
 		echo json_encode($res);
+	}
+	function cerrar(){
+		$fk_tmp	=$_POST['id'];
+		$mod	=$this->getModel();
+		return $mod->cerrar($fk_tmp);
 	}
 }
 ?>

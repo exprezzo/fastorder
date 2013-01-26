@@ -121,12 +121,14 @@ var EdicionArticulo=function (tabId){
 		//En la respuesta, refrescar el grid
 			
 		var datos={
-			id		:$(this.tabId+' .frmEditInlinePedido .txtId').val(),
+			id			:$(this.tabId+' .frmEditInlinePedido .txtId').val(),
+			id_tmp		:$(this.tabId+' .frmEditInlinePedido .txtIdTmp').val(),
 			cantidad	:$(this.tabId+' .frmEditInlinePedido .txtCantidad').val(),
 			IdTmp		: $(this.tabId+' .frmEditInlinePedido .txtIdTmp').val(),
 			fk_um		:$(this.tabId+' .frmEditInlinePedido .txtFkUm').val(),
-			fk_articulo		:$(this.tabId+' .frmEditInlinePedido .txtFkArticulo').val(),
-			fk_pedido:$(this.tabId+' .frmPedidoi .txtId').val()
+			fk_articulo	:$(this.tabId+' .frmEditInlinePedido .txtFkArticulo').val(),
+			fk_pedido	:$(this.tabId+' .frmPedidoi .txtId').val(),
+			fk_tmp		:$(this.tabId+' .frmPedidoi .txtIdTmp').val()
 		}
 		var me=this;
 		$.ajax({
@@ -172,6 +174,7 @@ var EdicionArticulo=function (tabId){
 		
 		var fields=[
 			{ name: "id"  },
+			{ name: "id_tmp"  },
 			{ name: "nombre"},
 			{ name: "fk_articulo"},
 			{ name: "cantidad"},
@@ -190,10 +193,10 @@ var EdicionArticulo=function (tabId){
 			reader:new wijarrayreader(fields),
 			loading: function(e, data) { 
 				var id=$(me.tabId+' .frmPedidoi .txtId').val();					
-				var IdTmp=$(me.tabId+' .frmPedidoi .txtIdTmp').val();					
+				var fk_tmp=$(me.tabId+' .frmPedidoi .txtIdTmp').val();					
 			
                 me.dataSource.proxy.options.data.id=id;
-				me.dataSource.proxy.options.data.IdTmp=IdTmp;
+				me.dataSource.proxy.options.data.fk_tmp=fk_tmp;
 				
 			}
 		});
@@ -223,6 +226,7 @@ var EdicionArticulo=function (tabId){
 			beforeCellEdit: this.beforeCellEdit, 
 			columns: [ 
 				{ dataKey: "id", hidden:true, visible:false, headerText: "ID" },
+				{ dataKey: "id_tmp", hidden:true, visible:false, headerText: "ID_TMP" },
 				{dataKey: "nombre", headerText: "Articulo"},
 				{dataKey: "cantidad", headerText: "Cantidad"},
 				{dataKey: "um", headerText: "um"},
@@ -247,6 +251,7 @@ var EdicionArticulo=function (tabId){
 			var row=item.row();
 			var data=row.data;			
 			me.selected=data;			
+			console.log("me.selected"); console.log(me.selected);
 		} });
 		
 		gridPedidos.wijgrid({ loaded: function (e) { 
@@ -428,6 +433,7 @@ var EdicionArticulo=function (tabId){
 		if (this.selected !=undefined){
 			
 			$(this.tabId+' .frmEditInlinePedido .txtId').val(this.selected.id);
+			$(this.tabId+' .frmEditInlinePedido .txtIdTmp').val(this.selected.id_tmp);
 			$(this.tabId+' .frmEditInlinePedido .txtCantidad').val(this.selected.cantidad);
 			$(this.tabId+' .frmEditInlinePedido .txtCantidad').wijinputnumber('setText',this.selected.cantidad);
 			$(this.tabId+' .frmEditInlinePedido .txtFkArticulo').val(this.selected.fk_articulo);				
@@ -465,10 +471,10 @@ var EdicionArticulo=function (tabId){
 		$(this.tabId+' .frmEditInlinePedido form  > div:eq(2)').css('width',w-5);				
 		$(this.tabId+' .frmEditInlinePedido .cmbUm').wijcombobox('repaint');				
 	};
-	this.mostrarTabEdicionArticulo=function(){
-		var data=this.selected;
-		this.mostrarTab(1, data);
-	};
+	// this.mostrarTabEdicionArticulo=function(){
+		// var data=this.selected;
+		// this.mostrarTab(1, data);
+	// };
 	this.mostrarTab=function(tabIndex, data){
 		
 		var tabId = this.tabId;

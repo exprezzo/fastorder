@@ -1,27 +1,10 @@
 <?php
 include '../'.$_PETICION->modulo.'/modelos/pedido_producto_model.php';
+include_once '../'.$_PETICION->modulo.'/modelos/pedido_producto_tmp_model.php';
 class PedidoModel extends Modelo_PDO{
-	var $tabla='pedidos';
-	var $tablas=array('tmp_pedidos','pedidos');
-	var $ids=array('IdTmp','id');
-	var $indexTabla=0;
-	function editar($id){
-		$this->indexTabla=1;
-		$pedido=$this->getPedido($id);
-		// echo 'Pedido';
-		// print_r($pedido);
-		// $this->indexTabla=0;
-		// $pedido = $this->guardar($pedido);
-		// echo 'Tmp Pedido';
-		// print_r($pedido);
+	var $tabla='pedidos';	
+	var $pk='id';
 		
-		return $pedido;
-	}
-	function guardarArticulo($params){		
-		$artMod= new PedidoProductoModel();
-		$artMod->indexTabla = $this->indexTabla;
-		return $artMod->guardar($params);
-	}
 	function nuevo(){
 		$params=array(
 			'id'=>0
@@ -29,27 +12,58 @@ class PedidoModel extends Modelo_PDO{
 		
 		$params=array();
 		$params['id']=0;
-		$params['almacen']=1;
+		$params['fk_almacen']=0;
+		$params['nombreAlmacen']='';
 		$params['fecha']=date('Y-m-d H:i:s');				
-		
-		//$fecha = DateTime::createFromFormat('d/m/Y', $strFecha);
-		//$strFecha= $fecha->format('Y-m-d H:i:s');
-		
-		return $this->guardar( $params );				
-	}
-	function getArticulos($params){
-		$artMod= new PedidoProductoModel();
-		$artMod->indexTabla = $this->indexTabla;
-		return $artMod->paginar($params);
+		$params['id_tmp']=uniqid();
+		$params['articulos']=array();
+		return array(
+			'success'=>true,
+			'datos'=>$params
+		);
+	}	
+	
+	function editar($idPedido){
+		$mod=$this->obtener($idPedido);		
+		$id_tmp=uniqid();
+		$mod['id_tmp']=$id_tmp;
+		$res=$this->clonar($idPedido, $id_tmp);
+		if (!$res['success']){
+			print_r($res); exit;
+		}
+		return $mod;
 	}
 	
-	function getPedido($idPedido){
+	function clonar($fk_pedido, $fk_tmp){
+		$sql='INSERT INTO tmp_pedidos_productos (id, fk_articulo, fk_pedido,cantidad, fk_um, fk_tmp)
+		SELECT id,fk_articulo, fk_pedido,cantidad, fk_um,:fk_tmp  fk_tmp from pedidos_productos WHERE fk_pedido=:fk_pedido';
+		
+		$con = $this->getConexion();
+		$sth = $con->prepare($sql);		
+		$sth->bindValue(':fk_pedido',$fk_pedido);		
+		$sth->bindValue(':fk_tmp',$fk_tmp);	
+		$exito = $sth->execute();
+		
+		$msg='ok';
+		if (!$exito){			
+			$resp['success']=false;
+			$error=$sth->errorInfo();
+			$msg    = $error[2];
+			$elemeno=$params;
+		}
+		
+		return array(
+			'success'=>$exito,
+			'msg'=>$msg
+		);						
+	}
+	function obtener($idPedido){
 		
 		$id=$idPedido;
 				
-		$sql = 'SELECT ped.*,alm.nombre as nombreAlmacen FROM '.$this->tablas[$this->indexTabla].' ped
+		$sql = 'SELECT ped.*,alm.nombre as nombreAlmacen FROM '.$this->tabla.' ped
 		LEFT JOIN almacenes alm ON alm.id = ped.fk_almacen
-		WHERE ped.'.$this->ids[$this->indexTabla].'=:id';		
+		WHERE ped.'.$this->pk.'=:id';		
 		
 		$con = $this->getConexion();
 		$sth = $con->prepare($sql);		
@@ -65,8 +79,10 @@ class PedidoModel extends Modelo_PDO{
 		if ( sizeof($modelos) > 1 ){
 			throw new Exception("El identificador está duplicado"); //TODO: agregar numero de error, crear una exception MiEscepcion
 		}
-		$articulos=$this->getArticulos( $id );
-		$modelos[0]['articulos']=$articulos;
+		
+		$articulos=array();
+		// $articulos=$this->getArticulos( $id );
+		 $modelos[0]['articulos']=$articulos;
 		return $modelos[0];	
 	}
 	
@@ -107,43 +123,38 @@ class PedidoModel extends Modelo_PDO{
 	}
 	function guardar($params){
 		$dbh=$this->getConexion();
-		
-		$id			=$params['id'];
+		$pk			=empty($params[$this->pk]) ? 0 : $params[$this->pk];
 		$fk_almacen	=$params['almacen'];
 		$strFecha	=$params['fecha'];
-	//	echo $strFecha; exit;
-		//$fecha = DateTime::createFromFormat('d/m/Y', $strFecha);
-		//$strFecha= $fecha->format('Y-m-d H:i:s');
-		if ( empty($id) ){
+		if ( empty($pk) ){
 			//           CREAR
-			$sql='INSERT INTO '.$this->tablas[$this->indexTabla].' SET fk_almacen=:fk_almacen , fecha= :fecha';
-			$sth = $dbh->prepare($sql);							
+			$sql='INSERT INTO '.$this->tabla.' SET fk_almacen=:fk_almacen , fecha= :fecha';
+			$sth = $dbh->prepare($sql);
 			$sth->bindValue(":fk_almacen",$fk_almacen,PDO::PARAM_INT);
 			$sth->bindValue(":fecha",$strFecha,PDO::PARAM_STR);
-			$msg='Pedido Guardado';							
+			$msg='Pedido Guardado';
 		}else{
 			//	         ACTUALIZAR
-			$sql='UPDATE '.$this->tablas[$this->indexTabla].' SET fk_almacen=:fk_almacen, fecha=:fecha WHERE id=:id';
-			$sth = $dbh->prepare($sql);							
-			$sth->bindValue(":id",$id,PDO::PARAM_INT);			
+			$sql='UPDATE '.$this->tabla.' SET fk_almacen=:fk_almacen, fecha=:fecha WHERE '.$this->pk.'=:pk';
+			$sth = $dbh->prepare($sql);
 			$sth->bindValue(":fk_almacen",$fk_almacen,PDO::PARAM_INT);
-			$sth->bindValue(":fecha",$strFecha,PDO::PARAM_STR);			
-			$msg='Pedido Actualizado';		
+			$sth->bindValue(":fecha",$strFecha,PDO::PARAM_STR);
+			$sth->bindValue(":pk",$pk,PDO::PARAM_INT);
+			$msg='Pedido Actualizado';
 		}
-			
+		
 		$exito = $sth->execute();
 		
-		
-		
 		if (!$exito){
-			//Logger->logear   		PENDIENTE: LOGEAR
 			$resp['success']=false;
 			$error=$sth->errorInfo();
 			$msg    = $error[2];
 			$pedido=$params;
 		}else{
-			if ( empty($id) ) $id=$dbh->lastInsertId();
-			$pedido=$this->getPedido($id);
+			if ( empty($pk) ) $pk=$dbh->lastInsertId();
+			$res=$this->procesarClones($pk,$params);
+			if (!$res['success']) return $res;
+			$pedido=$this->obtener($pk);
 		}
 		
 		return array(
@@ -153,5 +164,105 @@ class PedidoModel extends Modelo_PDO{
 		);
 		
 	}
+	
+	function procesarClones($fk_pedido, $params){
+		$resp=array();
+		$fk_tmp=$params['IdTmp'];			
+		
+		$sql='INSERT INTO pedidos_productos (fk_articulo, fk_pedido, cantidad, fk_um)
+		SELECT fk_articulo,:fk_pedido fk_pedido, cantidad, fk_um from tmp_pedidos_productos WHERE fk_tmp=:fk_tmp AND id=0';
+		
+		$con = $this->getConexion();
+		$sth = $con->prepare($sql);
+		$sth->bindValue(':fk_pedido',$fk_pedido,PDO::PARAM_INT);
+		$sth->bindValue(':fk_tmp',$fk_tmp,PDO::PARAM_STR);
+		$exito = $sth->execute();
+		
+		$msg='ok';
+		if (!$exito){
+			$resp['success']=false;
+			$error=$sth->errorInfo();
+			$msg    = $error[2];
+			$elemeno=$params;			
+		}
+		
+		//actualizar			
+		$sql='SELECT id, fk_articulo, cantidad, fk_um from tmp_pedidos_productos WHERE fk_tmp=:fk_tmp AND id!=0 AND fk_pedido=:fk_pedido';			
+		// $sql='INSERT INTO pedidos_productos (fk_articulo, fk_pedido, cantidad, fk_um)
+		// SELECT fk_articulo,:fk_pedido fk_pedido, cantidad, fk_um from tmp_pedidos_productos WHERE fk_tmp=:fk_tmp AND id=0';			
+		$con = $this->getConexion();
+		$sth = $con->prepare($sql);
+		$sth->bindValue(':fk_pedido',$fk_pedido,PDO::PARAM_INT);
+		$sth->bindValue(':fk_tmp',$fk_tmp,PDO::PARAM_STR);
+		$res = $this->consultar($sth);											
+		if (!$res['success'])return $res;
+		foreach($res['datos'] as $elemento){				
+			$fk_articulo=$elemento['fk_articulo'];
+			$cantidad=$elemento['cantidad'];
+			$id=$elemento['id'];
+			$fk_um=$elemento['fk_um'];
+			$sql='UPDATE pedidos_productos SET fk_articulo=:fk_articulo, cantidad=:cantidad, fk_um=:fk_um WHERE id=:id';
+			$sth = $con->prepare($sql);				
+			$sth->bindValue(':fk_articulo',$fk_articulo,PDO::PARAM_INT);
+			$sth->bindValue(':cantidad',$cantidad,PDO::PARAM_INT);
+			$sth->bindValue(':fk_um',$fk_um,PDO::PARAM_INT);
+			
+			$sth->bindValue(':id',intval($id),PDO::PARAM_INT);
+			$exito = $sth->execute();			
+			if (!$exito){
+				$resp['success']=false;
+				$error=$sth->errorInfo();
+				$msg    = $error[2];					
+				$resp['success']=false;
+				$resp['msg']=$msg;
+				return $resp;
+			}
+			
+		}
+		
+		//BORRAR TODO
+		$sql='DELETE FROM tmp_pedidos_productos WHERE fk_tmp=:fk_tmp';
+		$sth = $con->prepare($sql);							
+		$sth->bindValue(':fk_tmp',$fk_tmp,PDO::PARAM_STR);			
+		$exito = $sth->execute();			
+		if (!$exito){
+			$resp['success']=false;
+			$error=$sth->errorInfo();
+			$msg    = $error[2];					
+			$resp['success']=false;
+			$resp['msg']=$msg;
+			return $resp;
+		}
+		
+		//borrar
+		return array(
+			'success'=>$exito,
+			'msg'=>$msg
+		);
+	}
+	function cerrar($fk_tmp){
+		//BORRAR TODO
+		$con = $this->getConexion();
+		$sql='DELETE FROM tmp_pedidos_productos WHERE fk_tmp=:fk_tmp';
+		$sth = $con->prepare($sql);							
+		$sth->bindValue(':fk_tmp',$fk_tmp,PDO::PARAM_STR);			
+		$exito = $sth->execute();			
+		$msg='ok';
+		if (!$exito){
+			$resp['success']=false;
+			$error=$sth->errorInfo();
+			$msg  = $error[2];					
+			$resp['success']=false;
+			$resp['msg']=$msg;
+			return $resp;
+		}
+		
+		//borrar
+		return array(
+			'success'=>$exito,
+			'msg'=>$msg
+		);
+	}
+	
 }
 ?>

@@ -58,11 +58,11 @@
 	.frmPedidoi input.txtFecha {height: 26px !important;text-align: right !important;}
 	#tabs > ul{display:block;}
 	div.frmPedido{
-		margin-top: 20px !important;
-		/*padding: 0px;
+		/*margin-top: 20px !important;*/
+		padding: 0px;
 		
 		width: 100% !important;
-		left: 0;*/
+		left: 0;
 	}
 </style>
 <script src="/js/admin/catalogos/pedidos/edicion_pedido.js"></script>
@@ -125,21 +125,21 @@
 		$nombreAlmacen= $this->pedido['nombreAlmacen'];
 		$fk_almacen= isset($this->pedido)? $this->pedido['fk_almacen'] : '';
 		$id= isset($this->pedido)? $this->pedido['id'] : 0;
-		$idTmp= empty($this->pedido['IdTmp'])?0 : $this->pedido['IdTmp'];
+		$id_tmp= empty($this->pedido['id_tmp'])?0 : $this->pedido['id_tmp'];
 	}	
 ?>
 
 
-<div class="formTitle ui-widget-header ">
+<!--div class="formTitle ui-widget-header ">
 	<span class="">PEDIDO</span>
 	<span class="closeBtn ui-icon ui-icon-close"></span>
-</div>
+</div-->
 
 <div class="paneles">
 	<div class="pnlIzq">
 		<form class='frmPedidoi' style='padding-top:10px;'>	
 			<input type='hidden' name='id' class="txtId" value="<?php echo $id; ?>" />	
-			<input type='hidden' name='IdTmp' class="txtIdTmp" value="<?php echo $idTmp; ?>" />	
+			<input type='hidden' name='id_tmp' class="txtIdTmp" value="<?php echo $id_tmp; ?>" />	
 			<input type='hidden' name='fecha' class="txtFkAlmacen" value="<?php echo $fk_almacen; ?>" />
 			<div style='display:inline-block;'>
 				<div class="inputBox" style='margin-bottom:8px;'>

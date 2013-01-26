@@ -25,7 +25,7 @@
 		</select>
 		<input type="hidden" class="txtFkArticulo" />
 		<input type="hidden" class="txtFkUm" />
-		
+		<input type="hidden" class="txtIdTmp" />
 	</form>
 	<div class="toolbarFormPedidoInline">
 

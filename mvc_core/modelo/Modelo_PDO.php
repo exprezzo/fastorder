@@ -3,6 +3,8 @@ require_once '../mvc_core/i_crud.php';
 
 
 class Modelo_PDO implements ICrud{								
+	var $tabla='modelo_test';
+	var $pk='id';
 	
 	function getConexion(){		
 		global $DB_CONFIG;
@@ -11,7 +13,7 @@ class Modelo_PDO implements ICrud{
 		if ( !isset($this->db) ){
 			try {
 				$db = @new PDO('mysql:host='.$DB_CONFIG['DB_SERVER'].';dbname='.$DB_CONFIG{'DB_NAME'}.';charset=UTF8', $DB_CONFIG['DB_USER'], $DB_CONFIG['DB_PASS'],array(
-					PDO::ATTR_PERSISTENT => true
+					PDO::ATTR_PERSISTENT => false
 				));				
 				$this->db=$db;
 			} catch (PDOException $e) {
@@ -25,10 +27,41 @@ class Modelo_PDO implements ICrud{
 		}
 		return $this->db;
 	}
+	
+	//	Nos ayuda a revisar errores de ejecucion del query, asi podemos centralizar el logeo de errores u otras ocurrencias
+	
+	function consultar($sth){
+		return $this->execute($sth);
+	}
+	function insertar(){
+		$res = $this->execute($sth);
+		if ( !$res['success'] ) return $res;
+		
+		$pk=$dbh->lastInsertId();
+		$elemento=$this->obtener($pk);					
+	}
+	
+	function execute($sth){
+		$exito = $sth->execute();
+		// Manejar error				
+		if ($exito!==true){
+			$error=$sth->errorInfo();
+			$resp=array(
+				'success'=>false,
+				'msg'=>$error[2]
+			);
+			return $resp; 
+		}
+		$res = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return array(
+			'success'=>true,			
+			'datos' =>$res
+		);	
+	}
 /*	===============================================================================
 		ICrud
 	=============================================================================== */	
-	var $tabla='modelo_test';
+	
 	
 	public function contar($filtros=''){
 		if (!empty ($filtros) ){
@@ -48,7 +81,7 @@ class Modelo_PDO implements ICrud{
 		}
 		
 		if ( sizeof($modelos) > 1 ){
-			throw new Exception("El identificador está duplicado"); //TODO: agregar numero de error, crear una exception MiEscepcion
+			throw new Exception("El identificador estÃ¡ duplicado"); //TODO: agregar numero de error, crear una exception MiEscepcion
 		}
 		
 		return $modelos[0]['total'];			
@@ -59,46 +92,22 @@ class Modelo_PDO implements ICrud{
 		$sth = $con->prepare($sql);						
 		return $this->execute($sth);		
 	}
-	function execute($sth){
-		$exito = $sth->execute();
-		// Manejar error				
-		if ($exito!==true){
-			$error=$sth->errorInfo();
-			$resp=array(
-				'success'=>false,
-				'msg'=>$error[2]
-			);
-			return $resp; 
-		}
-		$res = $sth->fetchAll(PDO::FETCH_ASSOC);
-		return array(
-			'success'=>true,			
-			'datos' =>$res
-		);	
-	}
-	function obtener($params){
-		
-		$id=$params['id'];
-				
-		$sql = 'SELECT * FROM '.$this->tabla.' WHERE id=:id';		
-		
-		
+	
+	
+	function obtener($params){		
+		$pk=$params[$this->pk];				
+		$sql = 'SELECT * FROM '.$this->tabla.' WHERE '.$this->pk.'=:pk';				
 		$con = $this->getConexion();
 		$sth = $con->prepare($sql);		
-		$sth->bindValue(':id',$id);		
+		$sth->bindValue(':pk',$pk);		
 		$sth->execute();
-		$modelos = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
-		if ( empty($modelos) ){
-			//throw new Exception(); //TODO: agregar numero de error, crear una exception MiEscepcion
-			return array();
+		$res=$this->consultar($sth);
+		
+		if ( sizeof($res['datos']) > 1 ){
+			throw new Exception("El identificador está¡¤uplicado"); //TODO: agregar numero de error, crear una exception MiEscepcion
 		}
-		
-		if ( sizeof($modelos) > 1 ){
-			throw new Exception("El identificador está duplicado"); //TODO: agregar numero de error, crear una exception MiEscepcion
-		}
-		
-		return $modelos[0];			
+		return $res;				
 	}
 	
 	function guardar( $params ){

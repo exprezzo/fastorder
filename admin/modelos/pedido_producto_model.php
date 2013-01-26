@@ -17,8 +17,8 @@ class PedidoProductoModel extends Modelo_PDO{
 		$cantidad	=$params['cantidad'];
 		
 		if ( empty($id) ){
-			//           CREAR
-			$sql='INSERT INTO '.$this->tablas[$this->indexTabla].' SET fk_articulo=:fk_articulo, fk_um= :fk_um, cantidad=:cantidad, fk_pedido=:fk_pedido';
+			//           CREAR			
+			$sql='INSERT INTO '.$this->tablas[$this->indexTabla].' SET fk_articulo=:fk_articulo, fk_um= :fk_um, cantidad=:cantidad, fk_pedido=:fk_pedido';						
 			$sth = $dbh->prepare($sql);
 			$sth->bindValue(":fk_articulo", $fk_articulo, PDO::PARAM_INT);
 			$sth->bindValue(":fk_um", $fk_um,PDO::PARAM_INT);

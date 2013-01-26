@@ -25,6 +25,24 @@ var EdicionPedido = function(){
 		this.configurarFormulario(tabId);
 		this.configurarToolbar(tabId);
 		// this.configurarListaArticulos(tabId);
+		
+		//al cerrar notificar al servidor 
+		 $('#tabs > ul a[href="'+tabId+'"] + span').click(function(){
+			 var tmp=$('.frmPedidoi .txtIdTmp');
+				
+			if (tmp.length==1){
+				var id=$(tmp[0]).val();				
+				$.ajax({
+					type: "POST",
+					url: '/admin/pedidoi/cerrar',
+					data: { id:id }
+				}).done(function( response ) {
+					
+				});
+			}	
+	 });
+				
+				
 	};
 	this.nuevo=function(){
 		var tabId=this.tabId;
@@ -58,8 +76,10 @@ var EdicionPedido = function(){
 				icon='/images/yes.png';
 				title= 'Success';
 				
-				tab.find('.txtId').val(resp.datos.id),
-				tab.find('.txtFkAlmacen').val(resp.datos.fk_almacen),
+				tab.find('.txtId').val(resp.datos.id);
+				tab.find('.txtIdTmp').val(resp.datos.id_tmp);
+				
+				tab.find('.txtFkAlmacen').val(resp.datos.fk_almacen);
 				tab.find('.txtFecha').wijinputdate('option','date', resp.datos.fecha); 
 				$('a[href="'+me.tabId+'"]').html('Pedido-'+resp.datos.nombreAlmacen+' ID: '+resp.datos.id);		
 				

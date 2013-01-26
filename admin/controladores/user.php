@@ -8,11 +8,9 @@ class User extends Controlador{
 		$model->logout();
 		header ('Location: /index.php');
 	}
-	
-	
-	
+			
 	/*
-		emailDisponible: Revisa si el email proporcionado est· disponible para registrarse. (emailDisponible)		
+		emailDisponible: Revisa si el email proporcionado est√° disponible para registrarse. (emailDisponible)		
 		si el atributo $email es nulo, asumimos que se trata de una peticion ajax, asi que la respuesta sera un JSON
 		si el atributo $email no es nulo, la funcion responde true, false.
 	*/
